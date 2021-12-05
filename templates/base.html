@@ -11,6 +11,8 @@
 
     <title>Sistema Educacional</title>
 
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
+
     <!-- Fontes -->
     <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link
@@ -91,7 +93,7 @@
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                   aria-labelledby="userDropdown"
                 >
-                  <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                  <a class="dropdown-item" href="{% url 'cadastros:logout' %}">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Sair
                   </a>
