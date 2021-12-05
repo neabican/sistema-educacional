@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    {% load crispy_forms_tags %}
+    {% load static %}
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Consulte a cobertura de manutenção veícular dos seus clientes de forma rápida e fácil." />
+    <meta name="keywords" content="Universidade, Campus, Projeto, Acão, Afirmativa, Cadastro"/>
+    <meta name="author" content="IFSC Canoinhas" />
+
+    <title>Sistema Educacional</title>
+
+    <!-- Fontes -->
+    <link href="{% static 'assets/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet"
+    >
+
+    <!-- CSS do template -->
+    <link href="{% static 'assets/css/sb-admin-2.min.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="bg-gradient-primary">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+          <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+              <div class="row">
+                <div class="col-lg-6 d-none d-lg-flex flex-column align-items-center justify-content-center bg-gray-200">
+                  <h3 class="text-dark mb-4">Sistema Educacional</h3>
+                  <img 
+                    src="{% static 'img/ifsc.png' %}" 
+                    style="width: 200px;"
+                    class="img-fluid" 
+                    alt="Logo Instituto Federal de Santa Catarina"
+                  >
+                </div>
+
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                  <div class="p-5">
+                    <div class="text-center">
+                      <h1 class="h4 mb-4">Seja bem vindo(a)!</h1>
+                    </div>
+                    <form method="POST" class="user" autocomplete="off">
+                      {% csrf_token %}
+                      
+                      <div class="form-group mb-2">
+                        <label for="email" class="mb-1">Email</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                      </div>
+
+                      <div class="form-group mb-4">
+                        <label for="senha" class="mb-1">Senha</label>
+                        <input type="password" name="senha" id="senha" class="form-control">
+                      </div>
+
+                      <button type="submit" class="btn btn-primary btn-block">
+                        Entrar
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS Bootstrap -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Jquery -->
+    <script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- JS do template -->
+    <script src="{% static 'assets/js/sb-admin-2.min.js' %}"></script>
+  </body>
+</html>
