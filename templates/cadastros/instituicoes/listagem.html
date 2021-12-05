@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="d-flex justify-content-between mb-3">
+    <h3 class="mb-0">Instituições</h3>
+
+    <a href="#" class="btn btn-primary">
+      Cadastrar Instituição
+    </a>
+  </div>
+
+  <div class="card card-body shadow">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Nº de Câmpus</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for instituicao in instituicoes %}
+            <tr>
+              <td>{{ instituicao.id }}</td>
+              <td>{{ instituicao.nome }}</td>
+              <td>{{ instituicao.numero_campus }}</td>
+              <td>
+                <ul class="list-inline mb-0">
+                  <li class="list-inline-item">
+                    <a 
+                      href="#" 
+                      class="table-link" 
+                      data-bs-toggle="tooltip" 
+                      data-bs-placement="top" 
+                      title="Editar"
+                    >
+                      <i class="bx bx-edit"></i>
+                    </a>
+                  </li>
+
+                  <li class="list-inline-item">
+                    <a 
+                      href="#" 
+                      class="table-link" 
+                      data-bs-toggle="tooltip" 
+                      data-bs-placement="top" 
+                      title="Informações"
+                    >
+                      <i class="bx bx-info-circle"></i>
+                    </a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

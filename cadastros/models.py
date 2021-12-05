@@ -21,7 +21,7 @@ class Endereco(models.Model):
   latitude = models.DecimalField(max_digits=22, decimal_places=16)
 
   def __str__(self):
-    return f'A - {self.altitude} L - {self.latitude}'
+    return f'{self.logradouro}, {self.numero}'
 
 class Programa(models.Model):
   nome = models.CharField(max_length=300)
