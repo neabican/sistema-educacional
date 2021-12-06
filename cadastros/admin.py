@@ -36,11 +36,16 @@ class AcaoAfirmativaAdmin(admin.ModelAdmin):
   list_display = ('nome', 'link', 'campus')
   search_fields = ('nome',)
 
+class CursoAdmin(admin.ModelAdmin):
+  list_display = ('nome', 'descricao',)
+  search_fields = ('nome',)
+
 admin.site.register(Instituicao, InstituicaoAdmin)
 admin.site.register(Campus, CampusAdmin)
 admin.site.register(Programa, ProgramaAdmin)
 admin.site.register(Projeto, ProjetoAdmin)
 admin.site.register(AcaoAfirmativa, AcaoAfirmativaAdmin)
+admin.site.register(Curso, CursoAdmin)
 
 admin.site.register(Endereco)
 
