@@ -1,13 +1,13 @@
 from django.db import models
 
 class Instituicao(models.Model):
-  nome = models.CharField(max_length=300)
+  nome = models.CharField(max_length=250, unique=True)
 
   def __str__(self):
     return self.nome
 
 class Curso(models.Model):
-  nome = models.CharField(max_length=300)
+  nome = models.CharField(max_length=250, unique=True)
   descricao = models.TextField()
 
   def __str__(self):
