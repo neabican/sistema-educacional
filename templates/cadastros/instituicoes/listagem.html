@@ -4,12 +4,12 @@
   <div class="d-flex justify-content-between mb-3">
     <h3 class="mb-0">Instituições</h3>
 
-    <a href="#" class="btn btn-primary">
+    <a href="#" class="btn btn-sm btn-primary">
       Cadastrar Instituição
     </a>
   </div>
 
-  <div class="card card-body shadow">
+  <div class="card card-body shadow pb-1">
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
@@ -46,9 +46,9 @@
                       class="table-link" 
                       data-bs-toggle="tooltip" 
                       data-bs-placement="top" 
-                      title="Informações"
+                      title="Deletar"
                     >
-                      <i class="bx bx-info-circle"></i>
+                      <i class="bx bx-trash-alt"></i>
                     </a>
                   </li>
                 </ul>
@@ -58,5 +58,7 @@
         </tbody>
       </table>
     </div>
+
+    {% include 'utilitarios/paginador_tabela.html' with resultados=instituicoes paginas=paginas %}
   </div>
 {% endblock %}

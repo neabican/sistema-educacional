@@ -1,0 +1,73 @@
+<div class="row mt-3 justify-content-center justify-content-lg-end">
+  <nav id="paginador">
+    <ul class="pagination pagination-sm mr-lg-3">
+      <!-- Botão ANTERIOR -->
+      {% if resultados.has_previous %}
+        <li class="page-item">
+          <a href="?page={{ resultados.previous_page_number }}" class="page-link">
+            <i class="mdi mdi-chevron-left"></i>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a href="#" class="page-link">
+            <i class="mdi mdi-chevron-left"></i>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- Botões com números -->
+      {% if resultados.number > 2 %}
+        <li class="page-item">
+          <a href="?page=1" class="page-link">1</a>
+        </li>
+        <li class="page-item disabled">
+          <a href="#" class="page-link">
+            ...
+          </a>
+        </li>
+      {% endif %}
+
+      {% for pg in resultados.paginator.page_range %}
+        {% if resultados.number == pg %}
+          <li class="page-item active">
+            <a href="?page={{ pg }}" class="page-link">{{ pg }}</a>
+          </li>
+        {% elif pg >= paginas.anterior and pg < resultados.number %} 
+          <li class="page-item">
+            <a href="?page={{ pg }}" class="page-link">{{ pg }}</a>
+          </li>
+        {% elif pg > resultados.number and pg <= paginas.proximo %} 
+          <li class="page-item">
+            <a href="?page={{ pg }}" class="page-link">{{ pg }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% if resultados.number <= paginas.total %} <li class="page-item disabled">
+        <a href="#" class="page-link">
+          ...
+        </a>
+        </li>
+        <li class="page-item">
+          <a href="?page={{ paginas.ultimo }}" class="page-link">{{ paginas.ultimo }}</a>
+        </li>
+      {% endif %}
+      
+      <!-- Botão PRÓXIMO -->
+      {% if resultados.has_next %}
+        <li class="page-item">
+          <a href="?page={{ resultados.next_page_number }}" class="page-link">
+            <i class="mdi mdi-chevron-right"></i>
+          </a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a href="#" class="page-link">
+            <i class="mdi mdi-chevron-right"></i>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</div>
