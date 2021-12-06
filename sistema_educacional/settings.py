@@ -24,6 +24,8 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'usuarios.CustomUser'
 AUTHENTICATION_BACKENDS = ['usuarios.backends.EmailBackend']
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
