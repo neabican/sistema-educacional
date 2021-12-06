@@ -24,8 +24,10 @@
     <!-- CSS do template -->
     <link href="{% static 'assets/css/sb-admin-2.min.css' %}" rel="stylesheet">
 
-    <!-- CSS do projeto -->
+    <!-- CSS global do projeto -->
     <link href="{% static 'css/global.css' %}" rel="stylesheet">
+
+    {% block css %} {% endblock %}
   </head>
 
   <body id="page-top">
@@ -42,7 +44,7 @@
         <hr class="sidebar-divider my-0">
 
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <a class="nav-link" href="{% url 'cadastros:dashboard' %}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
         </li>
@@ -139,6 +141,8 @@
     <script src="{% static 'assets/js/sb-admin-2.min.js' %}"></script>
 
     <!-- JS Tooltip -->
-    <script src="{% static 'javascript/tooltip.js' %}"></script>
+    <script src="{% static 'javascript/global/tooltip.js' %}"></script>
+
+    {% block javascript %} {% endblock %}
   </body>
 </html>

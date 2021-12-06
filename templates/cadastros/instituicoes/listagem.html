@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
   {% include 'utilitarios/mensagens.html'%}
@@ -161,15 +162,8 @@
       </div>
     </div>
   </div>
+{% endblock %}
 
-  <script>
-    function abrirModalEdicao(nome, pk) {
-      document.getElementById('nome-edicao').value = nome;
-      document.getElementById('pk-edicao').value = pk;
-    }
-
-    function abrirModalDelecao(pk) {
-      document.getElementById('pk-delecao').value = pk;
-    }
-  </script>
+{% block javascript %}
+  <script src="{% static 'javascript/instituicao/instituicao.js' %}"></script>
 {% endblock %}
