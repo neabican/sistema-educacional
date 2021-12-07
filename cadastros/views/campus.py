@@ -42,7 +42,6 @@ def cadastrar_campus(request):
           nome=form.cleaned_data['nome'],
           instituicao=form.cleaned_data['instituicao']
         )
-
         messages.error(request, 'Este câmpus desta instituição já foi cadastrado.')
       except:
         # Caso não seja um câmpus repetido, tenta cadastrá-lo
@@ -62,4 +61,43 @@ def cadastrar_campus(request):
 
   return render(request, 'cadastros/campus/cadastro.html', {
     'tipo': 'Cadastro', 'form': form, 'form_endereco': form_endereco
+  })
+
+@login_required
+def editar_campus(request, pk):
+  campus = get_object_or_404(Campus, pk=pk)
+
+  if request.method == 'POST':
+    form = FormCampus(request.POST, instance=campus)
+    form_endereco = FormEndereco(request.POST, instance=campus.endereco)
+
+    if form.is_valid() and form_endereco.is_valid():
+      try:
+        # Tenta buscar um câmpus com o mesmo nome que pertença à mesma instituição
+        campus_repetido = Campus.objects.exclude(pk=pk).get(
+          nome=form.cleaned_data['nome'],
+          instituicao=form.cleaned_data['instituicao']
+        )
+        messages.error(request, 'Este câmpus desta instituição já foi cadastrado.')
+      except:
+        # Caso não seja um câmpus repetido, tenta cadastrá-lo
+        try:
+          campus = form.save(commit=False)
+          endereco = form_endereco.save()
+
+          campus.endereco = endereco
+          campus.save()
+          messages.success(request, 'Câmpus editado com sucesso.')
+
+          return redirect('cadastros:campus')
+        except:
+          messages.error(request, 'Erro ao tentar editar o câmpus. Tente novamente mais tarde.')
+    else:
+      messages.error(request, 'Erro ao tentar editar o câmpus. Verifique se todos câmpus foram preenchidos corretamente.')
+  else:
+    form = FormCampus(instance=campus)
+    form_endereco = FormEndereco(instance=campus.endereco)
+  
+  return render(request, 'cadastros/campus/cadastro.html', {
+    'tipo': 'Edição', 'form': form, 'form_endereco': form_endereco
   })
