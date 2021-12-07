@@ -1,6 +1,6 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 
 from ..models import Curso
 from ..forms import FormCurso
@@ -46,4 +46,24 @@ def cadastrar_curso(request):
 
   return render(request, 'cadastros/cursos/cadastro.html', {
     'tipo': 'Cadastro', 'form': form
+  })
+
+@login_required
+def editar_curso(request, pk):
+  curso = get_object_or_404(Curso, pk=pk)
+
+  if request.method == 'POST':
+    form = FormCurso(request.POST, instance=curso)
+
+    if form.is_valid():
+      form.save()
+      messages.success(request, 'Curso editado com sucesso.')
+      return redirect('cadastros:cursos')
+    else:
+      messages.error(request, 'Erro ao tentar cadastrar o curso. Verifique se todos campos foram preenchidos corretamente.')
+  else:
+    form = FormCurso(instance=curso)
+
+  return render(request, 'cadastros/cursos/cadastro.html', {
+    'tipo': 'Edição', 'form': form
   })
