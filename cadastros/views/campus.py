@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from ..models import Campus
+from ..models import Campus, Programa, Projeto, AcaoAfirmativa
 from ..forms import FormCampus, FormEndereco
 from .utilitarios import gerar_paginacao
 
@@ -101,3 +101,13 @@ def editar_campus(request, pk):
   return render(request, 'cadastros/campus/cadastro.html', {
     'tipo': 'Edição', 'form': form, 'form_endereco': form_endereco
   })
+
+@login_required
+def detalhes_campus(request, pk):
+  campus = get_object_or_404(Campus, pk=pk)
+
+  campus.programas = Programa.objects.filter(campus=campus)
+  campus.projetos = Projeto.objects.filter(campus=campus)
+  campus.acoes_afirmativas = AcaoAfirmativa.objects.filter(campus=campus)
+
+  return render(request, 'cadastros/campus/detalhes.html', {'campus': campus})

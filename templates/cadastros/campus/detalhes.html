@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <h5 class="text-primary mb-0">Dados Gerais</h5>
+            </div>
+            <div class="card-body">
+              <h6 class="mb-0">Nome</h6>
+              <p class="text-dark">{{ campus.nome }}</p>
+    
+              <h6 class="mb-0">Instituição</h6>
+              <p class="text-dark mb-0">{{ campus.instituicao.nome }}</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-12">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <h5 class="text-primary mb-0">Endereço</h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-8">
+                  <h6 class="mb-0">Logradouro</h6>
+                  <p class="text-dark">{{ campus.endereco.logradouro }}</p>
+                </div>
+                <div class="col-lg-4">
+                  <h6 class="mb-0">Número</h6>
+                  <p class="text-dark">{{ campus.endereco.numero }}</p>
+                </div>
+                <div class="col-lg-4">
+                  <h6 class="mb-0">CEP</h6>
+                  <p class="text-dark mb-2 mb-lg-0">{{ campus.endereco.cep }}</p>
+                </div>
+                <div class="col-lg-4">
+                  <h6 class="mb-0">Cidade</h6>
+                  <p class="text-dark mb-2 mb-lg-0">{{ campus.endereco.cidade }}</p>
+                </div>
+                <div class="col-lg-4">
+                  <h6 class="mb-0">Estado</h6>
+                  <p class="text-dark mb-0">{{ campus.endereco.estado }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-8">
+      <div class="row">
+        <div class="col-xl-3">
+          <div class="card card-body border-left-primary py-3 mb-3">
+            <h5 class="mb-0">Cursos</h5>
+            <h5 class="text-dark mb-0">{{ campus.cursos.count }}</h5>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div class="card card-body border-left-success py-3 mb-3">
+            <h5 class="mb-0">Programas</h5>
+            <h5 class="text-dark mb-0">{{ campus.programas.count }}</h5>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div class="card card-body border-left-warning py-3 mb-3">
+            <h5 class="mb-0">Projetos</h5>
+            <h5 class="text-dark mb-0">{{ campus.projetos.count }}</h5>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div class="card card-body border-left-danger py-3 mb-3">
+            <h5 class="mb-0">Ações Afirmativas</h5>
+            <h5 class="text-dark mb-0">{{ campus.acoes_afirmativas.count }}</h5>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <h5 class="text-primary mb-0">Cursos</h5>
+            </div>
+            <div class="card-body">
+              {% if campus.cursos %}
+
+              {% else %}
+                <h6 class="text-center">Nenhum curso cadastrado.</h6>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <h5 class="text-primary mb-0">Programas</h5>
+            </div>
+            <div class="card-body">
+              {% if campus.programas %}
+
+              {% else %}
+                <h6 class="text-center">Nenhum programa cadastrado.</h6>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <h5 class="text-primary mb-0">Projetos</h5>
+            </div>
+            <div class="card-body">
+              {% if campus.projetos %}
+
+              {% else %}
+                <h6 class="text-center">Nenhum projeto cadastrado.</h6>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <h5 class="text-primary mb-0">Ações Afirmativas</h5>
+            </div>
+            <div class="card-body">
+              {% if campus.acoes_afirmativas %}
+
+              {% else %}
+                <h6 class="text-center">Nenhuma ação afirmativa cadastrada.</h6>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
