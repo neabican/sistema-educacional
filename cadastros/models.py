@@ -8,7 +8,7 @@ class Instituicao(models.Model):
 
 class Curso(models.Model):
   nome = models.CharField(max_length=250, unique=True)
-  descricao = models.TextField()
+  descricao = models.TextField('Descrição')
 
   def __str__(self):
     return self.nome
@@ -47,17 +47,17 @@ class Endereco(models.Model):
   cidade = models.CharField(max_length=100)
   estado = models.CharField(max_length=50, choices=ESTADOS_CHOICES)
   logradouro = models.CharField(max_length=300)
-  numero = models.CharField(max_length=10)
-  cep = models.CharField(max_length=10)
-  altitude = models.DecimalField(max_digits=22, decimal_places=16)
+  numero = models.CharField('Número', max_length=10)
+  cep = models.CharField('CEP', max_length=10)
   latitude = models.DecimalField(max_digits=22, decimal_places=16)
+  longitude = models.DecimalField(max_digits=22, decimal_places=16)
 
   def __str__(self):
     return f'{self.logradouro}, {self.numero}'
 
 class Programa(models.Model):
   nome = models.CharField(max_length=300)
-  descricao = models.TextField()
+  descricao = models.TextField('Descrição')
   link = models.CharField(max_length=500)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
@@ -66,7 +66,7 @@ class Programa(models.Model):
 
 class Projeto(models.Model):
   nome = models.CharField(max_length=300)
-  descricao = models.TextField()
+  descricao = models.TextField('Descrição')
   link = models.CharField(max_length=500)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
@@ -75,7 +75,7 @@ class Projeto(models.Model):
 
 class AcaoAfirmativa(models.Model):
   nome = models.CharField(max_length=300)
-  descricao = models.TextField()
+  descricao = models.TextField('Descrição')
   link = models.CharField(max_length=500)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
