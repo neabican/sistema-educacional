@@ -356,11 +356,89 @@
         <div class="col-xl-6">
           <div class="card shadow mb-3">
             <div class="card-header">
-              <h5 class="text-primary mb-0">Ações Afirmativas</h5>
+              <div class="d-flex align-items-center justify-content-between">
+                <h5 class="text-primary mb-0">Ações Afirmativas</h5>
+                <a 
+                  href="{% url 'cadastros:cadastrar_acao_afirmativa' campus.pk %}"
+                  class="btn btn-sm btn-primary"
+                >
+                  Nova Ação Afirmativa
+                </a>
+              </div>
             </div>
             <div class="card-body">
               {% if campus.acoes_afirmativas %}
-
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hoverable" id="tabela-acao">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for acao in campus.acoes_afirmativas.all %}
+                        <tr>
+                          <td>{{ acao.nome }}</td>
+                          <td>
+                            {% if acao.link %}
+                              <a href="{{ acao.link }}" target="_blank">Acessar link</a>
+                            {% endif %}
+                          </td>
+                          <td>
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <a 
+                                  href="{% url 'cadastros:editar_acao_afirmativa' campus.pk acao.pk %}" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  title="Editar"
+                                >
+                                  <i class="bx bx-edit"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  id="{% url 'cadastros:deletar_acao_afirmativa' campus.pk acao.pk %}"
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-delecao"
+                                  onclick="abrirModalDelecao(event, 'acao')"
+                                  title="Deletar"
+                                >
+                                  <i class="bx bx-trash-alt"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-informacoes"
+                                  onclick="abrirModalInformacoes(
+                                    '{{ acao.nome }}',
+                                    '{{ acao.descricao }}',
+                                    '{{ acao.link }}'
+                                  )"
+                                  title="Informações"
+                                >
+                                  <i class="bx bx-info-circle"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
               {% else %}
                 <h6 class="text-center">Nenhuma ação afirmativa cadastrada.</h6>
               {% endif %}
@@ -435,9 +513,18 @@
 {% endblock %}
 
 {% block javascript %}
-  {% include 'utilitarios/config_data_table.html' with tipo="curso" %}
-  {% include 'utilitarios/config_data_table.html' with tipo="programa" %}
-  {% include 'utilitarios/config_data_table.html' with tipo="projeto" %}
+  {% if campus.cursos.count > 0 %}
+    {% include 'utilitarios/config_data_table.html' with tipo="curso" %}
+  {% endif %}
+  {% if campus.programas %}
+    {% include 'utilitarios/config_data_table.html' with tipo="programa" %}
+  {% endif %}
+  {% if campus.projetos %}
+    {% include 'utilitarios/config_data_table.html' with tipo="projeto" %}
+  {% endif %}
+  {% if campus.acoes_afirmativas %}
+    {% include 'utilitarios/config_data_table.html' with tipo="acao" %}
+  {% endif %}
 
   {{ coordenadas|json_script:"coordenadas" }}
 

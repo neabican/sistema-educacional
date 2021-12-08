@@ -71,6 +71,23 @@ urlpatterns = [
     name='deletar_projeto'
   ),
 
+  # Projetos
+  path(
+    'campus/detalhes/<int:pk_campus>/cadastrar-acao-afirmativa', 
+    views.cadastrar_acao_afirmativa, 
+    name='cadastrar_acao_afirmativa'
+  ),
+  path(
+    'campus/detalhes/<int:pk_campus>/editar-acao-afirmativa/<int:pk>', 
+    views.editar_acao_afirmativa, 
+    name='editar_acao_afirmativa'
+  ),
+  path(
+    'campus/detalhes/<int:pk_campus>/deletar-acao-afirmativa/<int:pk>', 
+    views.deletar_acao_afirmativa, 
+    name='deletar_acao_afirmativa'
+  ),
+
   path('login', views.login, name='login'),
   path('logout', views.logout, name='logout'),
 ]

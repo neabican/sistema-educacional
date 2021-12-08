@@ -129,3 +129,25 @@ class FormProjeto(ModelForm):
         Column('link', css_class='col-xl-12'),
       )
     )
+
+class FormAcaoAfirmativa(ModelForm):
+  class Meta:
+    model = AcaoAfirmativa
+    fields = ['nome', 'descricao', 'link',]
+
+  def __init__(self, *args, **kwargs):
+    super(FormAcaoAfirmativa, self).__init__(*args, **kwargs)
+    self.helper = FormHelper(self)
+    self.helper.form_tag = False
+    self.helper.attrs = {'novalidate': ''}
+    self.helper.layout = Layout(
+      Row(
+        Column('nome', css_class='col-xl-12'),
+      ),
+      Row(
+        Column('descricao', css_class='col-xl-12'),
+      ),
+      Row(
+        Column('link', css_class='col-xl-12'),
+      )
+    )
