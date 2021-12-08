@@ -1,4 +1,4 @@
 local_settings.py
 myvenv/
-static/
+/static
 media/
