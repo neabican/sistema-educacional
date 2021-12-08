@@ -9827,6 +9827,7 @@ a:focus {
   color: #fff;
   background: rgba(90, 92, 105, 0.5);
   line-height: 46px;
+  z-index: 999;
 }
 
 .scroll-to-top:focus, .scroll-to-top:hover {

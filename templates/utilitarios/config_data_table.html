@@ -25,13 +25,10 @@
       }
     );
 
-    // Retirando classes do limitador e do filtro
-    $('#tabela-consulta_length').children().children().removeClass('custom-select-sm');
-    $('#tabela-consulta_length').children().children().removeClass('form-control-sm');
-    $('#tabela-consulta_filter').children().children().removeClass('form-control-sm');
-    $('#tabela-curso_wrapper').children().last().addClass('align-items-center');
-    $('#tabela-curso_paginate').children().addClass('pagination-sm');
-    $('#tabela-curso_info').addClass('text-sm');
+    // Adicionando novas classes para melhor estilização
+    $('.dataTables_wrapper').children().last().addClass('align-items-center');
+    $('.dataTables_paginate').children().addClass('pagination-sm');
+    $('.dataTables_info').addClass('text-sm');
     
     $('#tabela-{{ tipo }}_wrapper').children()[0].id = 'filtro-tabela';
   });
