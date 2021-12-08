@@ -65,7 +65,7 @@ class Endereco(models.Model):
 class Programa(models.Model):
   nome = models.CharField(max_length=300)
   descricao = models.TextField('Descrição')
-  link = models.CharField(max_length=500)
+  link = models.CharField(max_length=500, blank=True, null=True)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
   def __str__(self):
@@ -74,7 +74,7 @@ class Programa(models.Model):
 class Projeto(models.Model):
   nome = models.CharField(max_length=300)
   descricao = models.TextField('Descrição')
-  link = models.CharField(max_length=500)
+  link = models.CharField(max_length=500, blank=True, null=True)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
   def __str__(self):
@@ -83,7 +83,7 @@ class Projeto(models.Model):
 class AcaoAfirmativa(models.Model):
   nome = models.CharField(max_length=300)
   descricao = models.TextField('Descrição')
-  link = models.CharField(max_length=500)
+  link = models.CharField(max_length=500, blank=True, null=True)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
   def __str__(self):

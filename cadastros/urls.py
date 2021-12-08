@@ -37,6 +37,13 @@ urlpatterns = [
     name='deletar_curso_campus'
   ),
 
+  # Programas
+  path(
+    'campus/detalhes/<int:pk_campus>/cadastrar-programa', 
+    views.cadastrar_programa, 
+    name='cadastrar_programa'
+  ),
+
   path('login', views.login, name='login'),
   path('logout', views.logout, name='logout'),
 ]

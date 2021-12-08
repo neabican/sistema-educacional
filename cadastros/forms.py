@@ -14,7 +14,6 @@ class FormCurso(ModelForm):
   def __init__(self, *args, **kwargs):
     super(FormCurso, self).__init__(*args, **kwargs)
     self.helper = FormHelper(self)
-    self.helper.form_method = 'post'
     self.helper.form_tag = False
     self.helper.attrs = {'novalidate': ''}
     self.helper.layout = Layout(
@@ -34,7 +33,6 @@ class FormCampus(ModelForm):
   def __init__(self, *args, **kwargs):
     super(FormCampus, self).__init__(*args, **kwargs)
     self.helper = FormHelper(self)
-    self.helper.form_method = 'post'
     self.helper.form_tag = False
     self.helper.attrs = {'novalidate': ''}
     self.helper.layout = Layout(
@@ -55,7 +53,6 @@ class FormEndereco(ModelForm):
   def __init__(self, *args, **kwargs):
     super(FormEndereco, self).__init__(*args, **kwargs)
     self.helper = FormHelper(self)
-    self.helper.form_method = 'post'
     self.helper.form_tag = False
     self.helper.attrs = {'novalidate': ''}
     self.helper.layout = Layout(
@@ -80,12 +77,33 @@ class FormCursoCampus(ModelForm):
   def __init__(self, *args, **kwargs):
     super(FormCursoCampus, self).__init__(*args, **kwargs)
     self.helper = FormHelper(self)
-    self.helper.form_method = 'post'
     self.helper.form_tag = False
     self.helper.attrs = {'novalidate': ''}
     self.helper.layout = Layout(
       Row(
         Column('curso', css_class='col-xl-6'),
         Column('link', css_class='col-xl-6'),
+      )
+    )
+
+class FormPrograma(ModelForm):
+  class Meta:
+    model = Programa
+    fields = ['nome', 'descricao', 'link',]
+
+  def __init__(self, *args, **kwargs):
+    super(FormPrograma, self).__init__(*args, **kwargs)
+    self.helper = FormHelper(self)
+    self.helper.form_tag = False
+    self.helper.attrs = {'novalidate': ''}
+    self.helper.layout = Layout(
+      Row(
+        Column('nome', css_class='col-xl-12'),
+      ),
+      Row(
+        Column('descricao', css_class='col-xl-12'),
+      ),
+      Row(
+        Column('link', css_class='col-xl-12'),
       )
     )
