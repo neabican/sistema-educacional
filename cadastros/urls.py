@@ -15,6 +15,7 @@ urlpatterns = [
   path('campus/cadastrar', views.cadastrar_campus, name='cadastrar_campus'),
   path('campus/editar/<int:pk>', views.editar_campus, name='editar_campus'),
   path('campus/detalhes/<int:pk>', views.detalhes_campus, name='detalhes_campus'),
+  path('campus/detalhes/<int:pk>/cadastrar-curso', views.cadastrar_curso_campus, name='cadastrar_curso_campus'),
 
   path('login', views.login, name='login'),
   path('logout', views.logout, name='logout'),

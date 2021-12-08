@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from ..models import Campus, Programa, Projeto, AcaoAfirmativa
-from ..forms import FormCampus, FormEndereco
+from ..forms import FormCampus, FormEndereco, FormCursoCampus
 from .utilitarios import gerar_paginacao
 
 @login_required
@@ -117,4 +117,28 @@ def detalhes_campus(request, pk):
 
   return render(request, 'cadastros/campus/detalhes.html', {
     'campus': campus, 'coordenadas': coordenadas
+  })
+
+@login_required
+def cadastrar_curso_campus(request, pk):
+  form = FormCursoCampus(request.POST or None)
+  campus = get_object_or_404(Campus, pk=pk)
+
+  if request.method == 'POST':
+    if form.is_valid():
+      try:
+        curso_repetido = campus.cursos.get(curso=form.cleaned_data['curso'])
+        messages.error(request, 'Este curso já foi cadastrado neste câmpus.')
+      except:
+        try:
+          campus.cursos.add(form.save())
+          messages.success(request, 'Curso cadastrado com sucesso.')
+          return redirect('cadastros:detalhes_campus', campus.pk)
+        except:
+          messages.error(request, 'Erro ao tentar cadastrar o curso. Tente novamente mais tarde.')
+    else:
+      messages.error(request, 'Erro ao tentar cadastrar o curso. Verifique se todos campos foram preenchidos corretamente.')
+
+  return render(request, 'cadastros/cursos_campus/cadastro.html', {
+    'tipo': 'Cadastro', 'form': form
   })

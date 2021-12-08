@@ -71,3 +71,21 @@ class FormEndereco(ModelForm):
         Column('longitude', css_class='col-xl-2'),
       )
     )
+
+class FormCursoCampus(ModelForm):
+  class Meta:
+    model = CursoCampus
+    fields = ['curso', 'link',]
+
+  def __init__(self, *args, **kwargs):
+    super(FormCursoCampus, self).__init__(*args, **kwargs)
+    self.helper = FormHelper(self)
+    self.helper.form_method = 'post'
+    self.helper.form_tag = False
+    self.helper.attrs = {'novalidate': ''}
+    self.helper.layout = Layout(
+      Row(
+        Column('curso', css_class='col-xl-6'),
+        Column('link', css_class='col-xl-6'),
+      )
+    )
