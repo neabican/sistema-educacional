@@ -110,4 +110,11 @@ def detalhes_campus(request, pk):
   campus.projetos = Projeto.objects.filter(campus=campus)
   campus.acoes_afirmativas = AcaoAfirmativa.objects.filter(campus=campus)
 
-  return render(request, 'cadastros/campus/detalhes.html', {'campus': campus})
+  coordenadas = {
+    'latitude': campus.endereco.latitude,
+    'longitude': campus.endereco.longitude
+  }
+
+  return render(request, 'cadastros/campus/detalhes.html', {
+    'campus': campus, 'coordenadas': coordenadas
+  })
