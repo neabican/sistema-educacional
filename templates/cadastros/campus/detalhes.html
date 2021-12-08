@@ -96,7 +96,7 @@
               <h5 class="text-primary mb-0">Cursos</h5>
             </div>
             <div class="card-body">
-              {% if campus.cursos %}
+              {% if campus.cursos.count > 0 %}
 
               {% else %}
                 <h6 class="text-center">Nenhum curso cadastrado.</h6>

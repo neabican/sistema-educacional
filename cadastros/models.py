@@ -13,6 +13,13 @@ class Curso(models.Model):
   def __str__(self):
     return self.nome
 
+class CursoCampus(models.Model):
+  curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
+  link = models.CharField(max_length=500)
+
+  def __str__(self):
+    return self.curso.nome
+
 class Endereco(models.Model):
   ESTADOS_CHOICES = (
     ('AC', 'Acre'),
@@ -86,6 +93,7 @@ class Campus(models.Model):
   nome = models.CharField(max_length=300)
   endereco = models.ForeignKey('Endereco', on_delete=models.PROTECT)
   instituicao = models.ForeignKey('Instituicao', on_delete=models.CASCADE)
+  cursos = models.ManyToManyField('CursoCampus')
 
   def __str__(self):
     return self.nome
