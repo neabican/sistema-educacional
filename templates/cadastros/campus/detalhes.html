@@ -147,7 +147,7 @@
                                   data-bs-placement="top" 
                                   data-toggle="modal" 
                                   data-target="#modal-delecao"
-                                  onclick="abrirModalDelecao(event)"
+                                  onclick="abrirModalDelecao(event, 'curso')"
                                   title="Deletar"
                                 >
                                   <i class="bx bx-trash-alt"></i>
@@ -231,13 +231,13 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modal-delecao-label">Deletar curso</h5>
+          <h5 class="modal-title" id="modal-delecao-label"></h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <p class="text-center mb-0">Você tem certeza que deseja deletar este curso?</p>
+          <p class="text-center mb-0">Você tem certeza que deseja deletar este registro?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
@@ -264,26 +264,5 @@
   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
   crossorigin=""></script>
 
-  <script>
-    const coordenadas = JSON.parse(document.getElementById('coordenadas').textContent);
-
-    const map = L.map('map').setView([coordenadas.latitude, coordenadas.longitude], 15);
-
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-      maxZoom: 18,
-      id: 'mapbox/streets-v11',
-      tileSize: 512,
-      zoomOffset: -1,
-      accessToken: 'pk.eyJ1IjoieHVuaXRvIiwiYSI6ImNrd3d2c2Z4NjA3NjczNHF0b2JwcnZ5OXMifQ.6u3NKOX3gQlF1Yo1_7L12g'
-    }).addTo(map);
-
-    L.marker([coordenadas.latitude, coordenadas.longitude]).addTo(map);
-
-    function abrirModalDelecao(event) {
-      // Buscando a URL para a deleção do registro através do ID
-      const url = event.target.id ? event.target.id : event.target.parentNode.id;
-      document.getElementById('button-submit').href = url;
-    }
-  </script>
+  <script src="{% static 'javascript/campus/campus.js' %}"></script>
 {% endblock %}
