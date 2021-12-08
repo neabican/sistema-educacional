@@ -1,0 +1,50 @@
+[
+  {
+    "model": "cadastros.curso_campus",
+    "pk": 1,
+    "fields": {
+      "curso": 1,
+      "link": "https://google.com"
+    }
+  },
+  {
+    "model": "cadastros.curso_campus",
+    "pk": 2,
+    "fields": {
+      "curso": 2,
+      "link": "https://google.com"
+    }
+  },
+  {
+    "model": "cadastros.curso_campus",
+    "pk": 3,
+    "fields": {
+      "curso": 2,
+      "link": "https://google.com"
+    }
+  },
+  {
+    "model": "cadastros.curso_campus",
+    "pk": 4,
+    "fields": {
+      "curso": 3,
+      "link": "https://google.com"
+    }
+  },
+  {
+    "model": "cadastros.curso_campus",
+    "pk": 5,
+    "fields": {
+      "curso": 4,
+      "link": "https://google.com"
+    }
+  },
+  {
+    "model": "cadastros.curso_campus",
+    "pk": 6,
+    "fields": {
+      "curso": 5,
+      "link": "https://google.com"
+    }
+  }
+]

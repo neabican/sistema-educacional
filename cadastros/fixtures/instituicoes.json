@@ -1,0 +1,37 @@
+[
+  {
+    "model": "cadastros.instituicao",
+    "pk": 1,
+    "fields": {
+      "nome": "Instituto Federal de Santa Catarina"
+    }
+  },
+  {
+    "model": "cadastros.instituicao",
+    "pk": 2,
+    "fields": {
+      "nome": "Instituto Federal do Rio Grande do Sul"
+    }
+  },
+  {
+    "model": "cadastros.instituicao",
+    "pk": 3,
+    "fields": {
+      "nome": "Instituto Federal do Paraná"
+    }
+  },
+  {
+    "model": "cadastros.instituicao",
+    "pk": 4,
+    "fields": {
+      "nome": "Instituto Federal de São Paulo"
+    }
+  },
+  {
+    "model": "cadastros.instituicao",
+    "pk": 5,
+    "fields": {
+      "nome": "Instituto Federal do Rio de Janeiro"
+    }
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "model": "cadastros.endereco",
+    "pk": 1,
+    "fields": {
+      "cidade": "Canoinhas",
+      "estado": "Santa Catarina",
+      "logradouro": "Avenida dos Expedicionários",
+      "numero": "2150",
+      "cep": "89466-312",
+      "latitude": -26.18410464667636,
+      "longitude": -50.36809656692009
+    }
+  },
+  {
+    "model": "cadastros.endereco",
+    "pk": 2,
+    "fields": {
+      "cidade": "Tubarão",
+      "estado": "Santa Catarina",
+      "logradouro": "Rua Dep. Olices Pedro de Caldas",
+      "numero": "480",
+      "cep": "88704-296",
+      "latitude": -28.47383840219285,
+      "longitude": -49.02425548574219
+    }
+  },
+  {
+    "model": "cadastros.endereco",
+    "pk": 3,
+    "fields": {
+      "cidade": "Telêmaco Borba",
+      "estado": "Paraná",
+      "logradouro": "R. Cento e Dezesseis",
+      "numero": "138",
+      "cep": "89466-312",
+      "latitude": -24.33714519871721,
+      "longitude": -50.65678383634026
+    }
+  },
+  {
+    "model": "cadastros.endereco",
+    "pk": 4,
+    "fields": {
+      "cidade": "Canoas",
+      "estado": "Rio Grande do Sul",
+      "logradouro": "Rua Dra. Maria Zélia Carneiro de Figueiredo",
+      "numero": "2150",
+      "cep": "92412-240",
+      "latitude": -29.899236044851754,
+      "longitude": -51.149053462999134
+    }
+  },
+  {
+    "model": "cadastros.endereco",
+    "pk": 5,
+    "fields": {
+      "cidade": "Registro",
+      "estado": "São Paulo",
+      "logradouro": "Avenida Clara Gianotti de Souza",
+      "numero": "100",
+      "cep": "11900-000",
+      "latitude": -24.53296061603642,
+      "longitude": -47.86916134244561
+    }
+  }
+]

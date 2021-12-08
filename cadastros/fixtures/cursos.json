@@ -1,0 +1,42 @@
+[
+  {
+    "model": "cadastros.curso",
+    "pk": 1,
+    "fields": {
+      "nome": "Agronomia",
+      "descricao": "O curso de agronomia foca os estudos de seus alunos no aperfeiçoamento de práticas agrícolas e zootécnicas, otimizando a produção agrícola."
+    }
+  },
+  {
+    "model": "cadastros.curso",
+    "pk": 2,
+    "fields": {
+      "nome": "Análise e Desenvolvimento de Sistemas",
+      "descricao": "O curso de Análise e Desenvolvimento de Sistemas forma profissionais capazes de desenvolver, analisar, projetar, implementar e atualizar sistemas de informação para diversos setores de atividades."
+    }
+  },
+  {
+    "model": "cadastros.curso",
+    "pk": 3,
+    "fields": {
+      "nome": "Medicina",
+      "descricao": "A medicina é a parte que estuda a saúde humana. Ela investiga, identifica e trata doenças."
+    }
+  },
+  {
+    "model": "cadastros.curso",
+    "pk": 4,
+    "fields": {
+      "nome": "Direito",
+      "descricao": "O curso de direito prepara profissionais para cuidar da aplicação das leis e normas jurídicas vigentes em um país ou região."
+    }
+  },
+  {
+    "model": "cadastros.curso",
+    "pk": 5,
+    "fields": {
+      "nome": "Administração",
+      "descricao": "O curso de administração forma profissionais para atuarem na área executiva, em funções administrativas, ou ainda abrirem o seu próprio negócio, capazes, tanto conceitualmente quanto na prática, de contribuir para o sucesso das organizações em que atuarem."
+    }
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "model": "cadastros.campus",
+    "pk": 1,
+    "fields": {
+      "nome": "Câmpus Canoinhas",
+      "instituicao": 1,
+      "endereco": 1,
+      "cursos": [1, 2]
+    }
+  },
+  {
+    "model": "cadastros.campus",
+    "pk": 2,
+    "fields": {
+      "nome": "Câmpus Tubarão",
+      "instituicao": 1,
+      "endereco": 2,
+      "cursos": []
+    }
+  },
+  {
+    "model": "cadastros.campus",
+    "pk": 3,
+    "fields": {
+      "nome": "Câmpus Telêmaco Borba",
+      "instituicao": 3,
+      "endereco": 3,
+      "cursos": [3]
+    }
+  },
+  {
+    "model": "cadastros.campus",
+    "pk": 4,
+    "fields": {
+      "nome": "Câmpus Canoas",
+      "instituicao": 2,
+      "endereco": 4,
+      "cursos": []
+    }
+  },
+  {
+    "model": "cadastros.campus",
+    "pk": 5,
+    "fields": {
+      "nome": "Câmpus Registro",
+      "instituicao": 4,
+      "endereco": 5,
+      "cursos": [4, 5, 6]
+    }
+  }
+]
