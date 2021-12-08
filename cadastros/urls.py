@@ -43,6 +43,16 @@ urlpatterns = [
     views.cadastrar_programa, 
     name='cadastrar_programa'
   ),
+  path(
+    'campus/detalhes/<int:pk_campus>/editar-programa/<int:pk>', 
+    views.editar_programa, 
+    name='editar_programa'
+  ),
+  path(
+    'campus/detalhes/<int:pk_campus>/deletar-programa/<int:pk>', 
+    views.deletar_programa, 
+    name='deletar_programa'
+  ),
 
   path('login', views.login, name='login'),
   path('logout', views.logout, name='logout'),

@@ -204,7 +204,7 @@
                             <ul class="list-inline mb-0">
                               <li class="list-inline-item">
                                 <a 
-                                  href="#" 
+                                  href="{% url 'cadastros:editar_programa' campus.pk programa.pk %}" 
                                   class="table-link" 
                                   data-bs-toggle="tooltip" 
                                   data-bs-placement="top" 
@@ -213,20 +213,37 @@
                                   <i class="bx bx-edit"></i>
                                 </a>
                               </li>
-            
                               <li class="list-inline-item">
                                 <a 
                                   href="#" 
-                                  id=""
+                                  id="{% url 'cadastros:deletar_programa' campus.pk programa.pk %}"
                                   class="table-link" 
                                   data-bs-toggle="tooltip" 
                                   data-bs-placement="top" 
                                   data-toggle="modal" 
                                   data-target="#modal-delecao"
-                                  onclick="abrirModalDelecao(event, 'curso')"
+                                  onclick="abrirModalDelecao(event, 'programa')"
                                   title="Deletar"
                                 >
                                   <i class="bx bx-trash-alt"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-informacoes"
+                                  onclick="abrirModalInformacoes(
+                                    '{{ programa.nome }}',
+                                    '{{ programa.descricao }}',
+                                    '{{ programa.link }}'
+                                  )"
+                                  title="Informações"
+                                >
+                                  <i class="bx bx-info-circle"></i>
                                 </a>
                               </li>
                             </ul>
@@ -281,6 +298,32 @@
             <div class="card-body p-0">
               <div id="map"></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de informações -->
+  <div class="modal fade" id="modal-informacoes" tabindex="-1" aria-labelledby="modal-informacoes-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-informacoes-label">Informações</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h6 class="mb-0">Nome</h6>
+          <p class="text-dark" id="info-nome"></p>
+
+          <h6 class="mb-0">Descrição</h6>
+          <p class="text-dark" id="info-descricao"></p>
+
+          <div id="info-link-wrapper">
+            <h6 class="mb-0">Link</h6>
+            <a href="#" id="info-link" target="_blank">Acessar link</a>
           </div>
         </div>
       </div>

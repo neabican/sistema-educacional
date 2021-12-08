@@ -14,6 +14,19 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 L.marker([coordenadas.latitude, coordenadas.longitude]).addTo(map);
 
+function abrirModalInformacoes(nome, descricao, link) {
+  document.getElementById('info-nome').textContent = nome;
+  document.getElementById('info-descricao').textContent = descricao;
+
+  if (link.trim() != 'None') {
+    document.getElementById('info-link-wrapper').classList.remove('d-none');
+    document.getElementById('info-link').href = link;
+  } else {
+    document.getElementById('info-link-wrapper').classList.add('d-none');
+    document.getElementById('info-link').href = '#';
+  }
+}
+
 function abrirModalDelecao(event, tipo) {
   // Buscando a URL para a deleção do registro através do ID
   const url = event.target.id ? event.target.id : event.target.parentNode.id;
