@@ -107,3 +107,25 @@ class FormPrograma(ModelForm):
         Column('link', css_class='col-xl-12'),
       )
     )
+
+class FormProjeto(ModelForm):
+  class Meta:
+    model = Projeto
+    fields = ['nome', 'descricao', 'link',]
+
+  def __init__(self, *args, **kwargs):
+    super(FormProjeto, self).__init__(*args, **kwargs)
+    self.helper = FormHelper(self)
+    self.helper.form_tag = False
+    self.helper.attrs = {'novalidate': ''}
+    self.helper.layout = Layout(
+      Row(
+        Column('nome', css_class='col-xl-12'),
+      ),
+      Row(
+        Column('descricao', css_class='col-xl-12'),
+      ),
+      Row(
+        Column('link', css_class='col-xl-12'),
+      )
+    )

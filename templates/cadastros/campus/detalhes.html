@@ -263,11 +263,89 @@
         <div class="col-xl-6">
           <div class="card shadow mb-3">
             <div class="card-header">
-              <h5 class="text-primary mb-0">Projetos</h5>
+              <div class="d-flex align-items-center justify-content-between">
+                <h5 class="text-primary mb-0">Projetos</h5>
+                <a 
+                  href="{% url 'cadastros:cadastrar_projeto' campus.pk %}"
+                  class="btn btn-sm btn-primary"
+                >
+                  Novo Projeto
+                </a>
+              </div>
             </div>
             <div class="card-body">
               {% if campus.projetos %}
-
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hoverable" id="tabela-projeto">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for projeto in campus.projetos.all %}
+                        <tr>
+                          <td>{{ projeto.nome }}</td>
+                          <td>
+                            {% if projeto.link %}
+                              <a href="{{ projeto.link }}" target="_blank">Acessar link</a>
+                            {% endif %}
+                          </td>
+                          <td>
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <a 
+                                  href="{% url 'cadastros:editar_projeto' campus.pk projeto.pk %}" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  title="Editar"
+                                >
+                                  <i class="bx bx-edit"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  id="{% url 'cadastros:deletar_projeto' campus.pk projeto.pk %}"
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-delecao"
+                                  onclick="abrirModalDelecao(event, 'projeto')"
+                                  title="Deletar"
+                                >
+                                  <i class="bx bx-trash-alt"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-informacoes"
+                                  onclick="abrirModalInformacoes(
+                                    '{{ projeto.nome }}',
+                                    '{{ projeto.descricao }}',
+                                    '{{ projeto.link }}'
+                                  )"
+                                  title="Informações"
+                                >
+                                  <i class="bx bx-info-circle"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
               {% else %}
                 <h6 class="text-center">Nenhum projeto cadastrado.</h6>
               {% endif %}
@@ -359,6 +437,7 @@
 {% block javascript %}
   {% include 'utilitarios/config_data_table.html' with tipo="curso" %}
   {% include 'utilitarios/config_data_table.html' with tipo="programa" %}
+  {% include 'utilitarios/config_data_table.html' with tipo="projeto" %}
 
   {{ coordenadas|json_script:"coordenadas" }}
 

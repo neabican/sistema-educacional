@@ -54,6 +54,23 @@ urlpatterns = [
     name='deletar_programa'
   ),
 
+  # Projetos
+  path(
+    'campus/detalhes/<int:pk_campus>/cadastrar-projeto', 
+    views.cadastrar_projeto, 
+    name='cadastrar_projeto'
+  ),
+  path(
+    'campus/detalhes/<int:pk_campus>/editar-projeto/<int:pk>', 
+    views.editar_projeto, 
+    name='editar_projeto'
+  ),
+  path(
+    'campus/detalhes/<int:pk_campus>/deletar-projeto/<int:pk>', 
+    views.deletar_projeto, 
+    name='deletar_projeto'
+  ),
+
   path('login', views.login, name='login'),
   path('logout', views.logout, name='logout'),
 ]

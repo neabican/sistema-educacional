@@ -4,3 +4,4 @@ from .instituicoes import *
 from .cursos import *
 from .campus import *
 from .programas import *
+from .projetos import *
