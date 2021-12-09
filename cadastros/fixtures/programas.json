@@ -1,0 +1,47 @@
+[
+  {
+    "model": "cadastros.programa",
+    "pk": 1,
+    "fields": {
+      "nome": "Programa 1",
+      "descricao": "Insira aqui uma descrição do programa...",
+      "campus": 1
+    }
+  },
+  {
+    "model": "cadastros.programa",
+    "pk": 2,
+    "fields": {
+      "nome": "Programa 2",
+      "descricao": "Insira aqui uma descrição do programa...",
+      "campus": 1
+    }
+  },
+  {
+    "model": "cadastros.programa",
+    "pk": 3,
+    "fields": {
+      "nome": "Programa 3",
+      "descricao": "Insira aqui uma descrição do programa...",
+      "campus": 1
+    }
+  },
+  {
+    "model": "cadastros.programa",
+    "pk": 4,
+    "fields": {
+      "nome": "Programa 4",
+      "descricao": "Insira aqui uma descrição do programa...",
+      "campus": 3
+    }
+  },
+  {
+    "model": "cadastros.programa",
+    "pk": 5,
+    "fields": {
+      "nome": "Programa 5",
+      "descricao": "Insira aqui uma descrição do programa...",
+      "campus": 4
+    }
+  }
+]

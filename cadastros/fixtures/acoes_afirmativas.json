@@ -1,0 +1,47 @@
+[
+  {
+    "model": "cadastros.acao_afirmativa",
+    "pk": 1,
+    "fields": {
+      "nome": "Ação Afirmativa 1",
+      "descricao": "Insira aqui uma descrição da ação afirmativa...",
+      "campus": 1
+    }
+  },
+  {
+    "model": "cadastros.acao_afirmativa",
+    "pk": 2,
+    "fields": {
+      "nome": "Ação Afirmativa 2",
+      "descricao": "Insira aqui uma descrição da ação afirmativa...",
+      "campus": 2
+    }
+  },
+  {
+    "model": "cadastros.acao_afirmativa",
+    "pk": 3,
+    "fields": {
+      "nome": "Ação Afirmativa 3",
+      "descricao": "Insira aqui uma descrição da ação afirmativa...",
+      "campus": 3
+    }
+  },
+  {
+    "model": "cadastros.acao_afirmativa",
+    "pk": 4,
+    "fields": {
+      "nome": "Ação Afirmativa 4",
+      "descricao": "Insira aqui uma descrição da ação afirmativa...",
+      "campus": 3
+    }
+  },
+  {
+    "model": "cadastros.acao_afirmativa",
+    "pk": 5,
+    "fields": {
+      "nome": "Ação Afirmativa 5",
+      "descricao": "Insira aqui uma descrição da ação afirmativa...",
+      "campus": 5
+    }
+  }
+]
