@@ -12,11 +12,6 @@ class InstituicaoTestCase(TestCase):
     instituicoes = Instituicao.objects.all().count()
     self.assertIs(instituicoes, 2)
 
-    # # Verificando se ele impede o cadastro de uma
-    # # instituição com o nome repetido
-    # self.assertRaises(IntegrityError, Instituicao.objects.create(nome='Instituto Federal de Santa Catarina'))
-    # self.assertRaises(IntegrityError, Instituicao.objects.create(nome='Instituto Federal do Paraná'))
-
     Instituicao.objects.create(nome='Universidade Federal de Santa Catarina')
 
     # Contando as instituições que possuem
@@ -40,11 +35,6 @@ class CursoTestCase(TestCase):
     self.assertEqual(curso.descricao, 'Faça a justiça valer')
     curso = Curso.objects.get(nome='Agronomia')
     self.assertNotEqual(curso.descricao, 'Descrição errada')
-
-    # # Verificando se ele impede o cadastro de um
-    # # curso com o nome repetido
-    # self.assertRaises(IntegrityError, Curso.objects.create(nome='Medicina', descricao='Descrição diferente'))
-    # self.assertRaises(IntegrityError, Curso.objects.create(nome='Agronomia', descricao='Descrição diferente'))
 
 class EnderecoTestCase(TestCase):
   def setUp(self):
@@ -150,6 +140,7 @@ class ProgramaTestCase(TestCase):
     Programa.objects.create(
       nome='Programa 1',
       descricao='Imagine uma descrição incrível aqui...',
+      link='https://link.com',
       campus=Campus.objects.get(pk=1)
     )
     
@@ -180,12 +171,121 @@ class ProgramaTestCase(TestCase):
     Programa.objects.create(
       nome='Programa 4',
       descricao='Um programa responsável por distribuir alimento para os alunos',
+      link='https://programa.com.br',
       campus=Campus.objects.get(pk=3)
     )
 
     programas = Programa.objects.all().count()
     self.assertIs(programas, 4)
 
-    prog_4 = Programa.objects.get(nome='Programa 4', campus__pk=3)
-    self.assertEqual(prog_4.descricao, 'Um programa responsável por distribuir alimento para os alunos')
-    self.assertEqual(prog_4.campus.nome, 'Câmpus Telêmaco Borba')
+    programa = Programa.objects.get(nome='Programa 4', campus__pk=3)
+    self.assertEqual(programa.descricao, 'Um programa responsável por distribuir alimento para os alunos')
+    self.assertEqual(programa.campus.nome, 'Câmpus Telêmaco Borba')
+    self.assertEqual(programa.link, 'https://programa.com.br')
+
+class ProjetoTestCase(TestCase):
+  fixtures = [
+    'instituicoes',
+    'enderecos',
+    'campus'
+  ]
+
+  def setUp(self):
+    Projeto.objects.create(
+      nome='Projeto 1',
+      descricao='Imagine uma descrição incrível aqui...',
+      link='https://link.com',
+      campus=Campus.objects.get(pk=1)
+    )
+    
+    Projeto.objects.create(
+      nome='Projeto 2',
+      descricao='Imagine uma descrição incrível aqui...',
+      link='https://link.com',
+      campus=Campus.objects.get(pk=1)
+    )
+
+    Projeto.objects.create(
+      nome='Programa 3',
+      descricao='Imagine uma descrição incrível aqui...',
+      campus=Campus.objects.get(pk=2)
+    )
+
+  def test_projeto_attrs(self):
+    projetos = Projeto.objects.all().count()
+    self.assertIs(projetos, 3)
+
+    # Buscando os projetos do 'Câmpus Canoinhas'
+    # da instituição 'Instituto Federal de Santa Catarina'
+    proj_canoinhas = Projeto.objects.filter(
+      campus__nome='Câmpus Canoinhas',
+      campus__instituicao__nome='Instituto Federal de Santa Catarina'
+    ).count()
+    self.assertIs(proj_canoinhas, 2)
+
+    Projeto.objects.create(
+      nome='Projeto 4',
+      descricao='Um projeto muito legal',
+      campus=Campus.objects.get(pk=3)
+    )
+
+    projetos = Projeto.objects.all().count()
+    self.assertIs(projetos, 4)
+
+    projeto = Projeto.objects.get(nome='Projeto 4', campus__pk=3)
+    self.assertEqual(projeto.descricao, 'Um projeto muito legal')
+    self.assertEqual(projeto.campus.nome, 'Câmpus Telêmaco Borba')
+
+class AcaoAfirmativaTestCase(TestCase):
+  fixtures = [
+    'instituicoes',
+    'enderecos',
+    'campus'
+  ]
+
+  def setUp(self):
+    AcaoAfirmativa.objects.create(
+      nome='AcaoAfirmativa 1',
+      descricao='Imagine uma descrição incrível aqui...',
+      link='https://link.com',
+      campus=Campus.objects.get(pk=1)
+    )
+    
+    AcaoAfirmativa.objects.create(
+      nome='Ação Afirmativa 2',
+      descricao='Imagine uma descrição incrível aqui...',
+      campus=Campus.objects.get(pk=1)
+    )
+
+    AcaoAfirmativa.objects.create(
+      nome='Programa 3',
+      descricao='Imagine uma descrição incrível aqui...',
+      link='https://link.com',
+      campus=Campus.objects.get(pk=2)
+    )
+
+  def test_acao_afirmativa_attrs(self):
+    acoes_afirmativas = AcaoAfirmativa.objects.all().count()
+    self.assertIs(acoes_afirmativas, 3)
+
+    # Buscando as ações afirmativas do 'Câmpus Canoinhas'
+    # da instituição 'Instituto Federal de Santa Catarina'
+    acoes_canoinhas = AcaoAfirmativa.objects.filter(
+      campus__nome='Câmpus Canoinhas',
+      campus__instituicao__nome='Instituto Federal de Santa Catarina'
+    ).count()
+    self.assertIs(acoes_canoinhas, 2)
+
+    AcaoAfirmativa.objects.create(
+      nome='Projeto 4',
+      descricao='Um projeto muito legal',
+      campus=Campus.objects.get(pk=3)
+    )
+
+    acoes_afirmativas = AcaoAfirmativa.objects.all().count()
+    self.assertIs(acoes_afirmativas, 4)
+
+    acao_afirmativa = AcaoAfirmativa.objects.get(nome='Projeto 4', campus__pk=3)
+    self.assertEqual(acao_afirmativa.descricao, 'Um projeto muito legal')
+    self.assertEqual(acao_afirmativa.campus.nome, 'Câmpus Telêmaco Borba')
+    self.assertEqual(acao_afirmativa.link, None)
