@@ -2,3 +2,9 @@ local_settings.py
 myvenv/
 /static
 media/
+
+
+__pycache__
+*.pyc
+*~
+*.log
