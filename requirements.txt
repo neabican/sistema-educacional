@@ -2,3 +2,4 @@ Django
 mysqlclient
 Pillow
 django-crispy-forms
+django-ckeditor

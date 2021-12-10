@@ -6,3 +6,11 @@
 .text-sm {
   font-size: 14px;
 }
+
+.textarea-descricao > div > div > div {
+  width: 100%;
+}
+
+#cke_id_descricao {
+  width: auto !important;
+}

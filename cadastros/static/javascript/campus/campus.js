@@ -16,7 +16,9 @@ L.marker([coordenadas.latitude, coordenadas.longitude]).addTo(map);
 
 function abrirModalInformacoes(nome, descricao, link) {
   document.getElementById('info-nome').textContent = nome;
-  document.getElementById('info-descricao').textContent = descricao;
+  document.getElementById('info-descricao').innerHTML = descricao;
+
+  console.log(descricao);
 
   if (link.trim() != 'None') {
     document.getElementById('info-link-wrapper').classList.remove('d-none');

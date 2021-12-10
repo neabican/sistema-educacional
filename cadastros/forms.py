@@ -21,7 +21,7 @@ class FormCurso(ModelForm):
         Column('nome', css_class='col-xl-12')
       ),
       Row(
-        Column('descricao', css_class='col-xl-12')
+        Column('descricao', css_class='col-xl-12 textarea-descricao')
       )
     )
 
@@ -101,7 +101,7 @@ class FormPrograma(ModelForm):
         Column('nome', css_class='col-xl-12'),
       ),
       Row(
-        Column('descricao', css_class='col-xl-12'),
+        Column('descricao', css_class='col-xl-12 textarea-descricao'),
       ),
       Row(
         Column('link', css_class='col-xl-12'),
@@ -123,7 +123,7 @@ class FormProjeto(ModelForm):
         Column('nome', css_class='col-xl-12'),
       ),
       Row(
-        Column('descricao', css_class='col-xl-12'),
+        Column('descricao', css_class='col-xl-12 textarea-descricao'),
       ),
       Row(
         Column('link', css_class='col-xl-12'),
@@ -145,7 +145,7 @@ class FormAcaoAfirmativa(ModelForm):
         Column('nome', css_class='col-xl-12'),
       ),
       Row(
-        Column('descricao', css_class='col-xl-12'),
+        Column('descricao', css_class='col-xl-12 textarea-descricao'),
       ),
       Row(
         Column('link', css_class='col-xl-12'),

@@ -18,7 +18,8 @@ INSTALLED_APPS = [
     'cadastros',
     
     # Third-Party apps
-    'crispy_forms'
+    'crispy_forms',
+    'ckeditor',
 ]
 
 AUTH_USER_MODEL = 'usuarios.CustomUser'

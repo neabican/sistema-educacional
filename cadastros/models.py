@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 class Instituicao(models.Model):
   nome = models.CharField(max_length=250, unique=True)
@@ -8,7 +9,7 @@ class Instituicao(models.Model):
 
 class Curso(models.Model):
   nome = models.CharField(max_length=250, unique=True)
-  descricao = models.TextField('Descrição')
+  descricao = RichTextField('Descrição')
 
   def __str__(self):
     return self.nome
@@ -64,7 +65,7 @@ class Endereco(models.Model):
 
 class Programa(models.Model):
   nome = models.CharField(max_length=300)
-  descricao = models.TextField('Descrição')
+  descricao = RichTextField('Descrição')
   link = models.CharField(max_length=500, blank=True, null=True)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
@@ -73,7 +74,7 @@ class Programa(models.Model):
 
 class Projeto(models.Model):
   nome = models.CharField(max_length=300)
-  descricao = models.TextField('Descrição')
+  descricao = RichTextField('Descrição')
   link = models.CharField(max_length=500, blank=True, null=True)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
@@ -82,7 +83,7 @@ class Projeto(models.Model):
 
 class AcaoAfirmativa(models.Model):
   nome = models.CharField(max_length=300)
-  descricao = models.TextField('Descrição')
+  descricao = RichTextField('Descrição')
   link = models.CharField(max_length=500, blank=True, null=True)
   campus = models.ForeignKey('Campus', on_delete=models.CASCADE)
 
