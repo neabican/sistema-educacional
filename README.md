@@ -5,5 +5,5 @@ Este sistema web tem como intuito possibilitar o cadastro, edição e deleção 
 
 ## Diagrama do Banco de Dados
 Abaixo está o diagrama que representa as tabelas existentes no banco de dados do projeto, assim como suas relações entre si.
-![Diagrama do Banco de Dados](.github/diagrama_bd.jpeg)
+![Diagrama do Banco de Dados](.github/diagrama_bd.png)
 _Favor manter o diagrama mais atualizado o possível_
