@@ -28,7 +28,7 @@
             <tr>
               <td>{{ curso.id }}</td>
               <td>{{ curso.nome }}</td>
-              <td>{{ curso.descricao }}</td>
+              <td>{{ curso.descricao|safe|truncatechars:150 }}</td>
               <td>
                 <ul class="list-inline mb-0">
                   <li class="list-inline-item">
@@ -98,7 +98,7 @@
           <p class="text-dark" id="nome-curso"></p>
 
           <h6 class="mb-0">Descrição</h6>
-          <p class="text-dark" id="descricao-curso"></p>
+          <div class="text-dark" id="descricao-curso"></div>
         </div>
       </div>
     </div>
