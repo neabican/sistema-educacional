@@ -93,7 +93,7 @@ class AcaoAfirmativa(models.Model):
 class Campus(models.Model):
   nome = models.CharField(max_length=300)
   endereco = models.ForeignKey('Endereco', on_delete=models.PROTECT)
-  instituicao = models.ForeignKey('Instituicao', on_delete=models.CASCADE)
+  instituicao = models.ForeignKey('Instituicao', on_delete=models.PROTECT)
   cursos = models.ManyToManyField('CursoCampus')
 
   def __str__(self):
