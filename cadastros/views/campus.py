@@ -8,6 +8,8 @@ from .utilitarios import gerar_paginacao
 
 @login_required
 def campus(request):
+  status_code = 200
+
   if request.method == 'POST':
     try:
       pk = request.POST['pk']
@@ -18,8 +20,10 @@ def campus(request):
         messages.success(request, 'Câmpus deletado com sucesso.')
       except:
         messages.error(request, 'Erro ao tentar deletar o câmpus. Tente novamente mais tarde.')  
+        status_code = 400
     except Campus.DoesNotExist:
       messages.error(request, 'Erro ao tentar deletar o câmpus. O câmpus não foi encontrado.')
+      status_code = 404
 
   campus = Campus.objects.all().order_by('id')
   # Paginando resultados
@@ -27,12 +31,13 @@ def campus(request):
 
   return render(request, 'cadastros/campus/listagem.html', {
     'lista_campus': campus, 'paginas': paginas
-  })
+  }, status=status_code)
 
 @login_required
 def cadastrar_campus(request):
   form = FormCampus(request.POST or None)
   form_endereco = FormEndereco(request.POST or None)
+  status_code = 200
 
   if request.method == 'POST':
     if form.is_valid() and form_endereco.is_valid():
@@ -43,6 +48,7 @@ def cadastrar_campus(request):
           instituicao=form.cleaned_data['instituicao']
         )
         messages.error(request, 'Este câmpus desta instituição já foi cadastrado.')
+        status_code = 400
       except:
         # Caso não seja um câmpus repetido, tenta cadastrá-lo
         try:
@@ -56,16 +62,19 @@ def cadastrar_campus(request):
           return redirect('cadastros:campus')
         except:
           messages.error(request, 'Erro ao tentar cadastrar o câmpus. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar cadastrar o câmpus. Verifique se todos câmpus foram preenchidos corretamente.')
+      status_code = 400
 
   return render(request, 'cadastros/campus/cadastro.html', {
     'tipo': 'Cadastro', 'form': form, 'form_endereco': form_endereco
-  })
+  }, status=status_code)
 
 @login_required
 def editar_campus(request, pk):
   campus = get_object_or_404(Campus, pk=pk)
+  status_code = 200
 
   if request.method == 'POST':
     form = FormCampus(request.POST, instance=campus)
@@ -79,6 +88,7 @@ def editar_campus(request, pk):
           instituicao=form.cleaned_data['instituicao']
         )
         messages.error(request, 'Este câmpus desta instituição já foi cadastrado.')
+        status_code = 400
       except:
         # Caso não seja um câmpus repetido, tenta cadastrá-lo
         try:
@@ -92,15 +102,17 @@ def editar_campus(request, pk):
           return redirect('cadastros:campus')
         except:
           messages.error(request, 'Erro ao tentar editar o câmpus. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar editar o câmpus. Verifique se todos câmpus foram preenchidos corretamente.')
+      status_code = 400
   else:
     form = FormCampus(instance=campus)
     form_endereco = FormEndereco(instance=campus.endereco)
   
   return render(request, 'cadastros/campus/cadastro.html', {
     'tipo': 'Edição', 'form': form, 'form_endereco': form_endereco
-  })
+  }, status=status_code)
 
 @login_required
 def detalhes_campus(request, pk):
@@ -123,12 +135,14 @@ def detalhes_campus(request, pk):
 def cadastrar_curso_campus(request, pk):
   form = FormCursoCampus(request.POST or None)
   campus = get_object_or_404(Campus, pk=pk)
+  status_code = 200
 
   if request.method == 'POST':
     if form.is_valid():
       try:
         curso_repetido = campus.cursos.get(curso=form.cleaned_data['curso'])
         messages.error(request, 'Este curso já foi cadastrado neste câmpus.')
+        status_code = 400
       except:
         try:
           campus.cursos.add(form.save())
@@ -136,17 +150,20 @@ def cadastrar_curso_campus(request, pk):
           return redirect('cadastros:detalhes_campus', campus.pk)
         except:
           messages.error(request, 'Erro ao tentar cadastrar o curso. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar cadastrar o curso. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
 
   return render(request, 'cadastros/cursos_campus/cadastro.html', {
     'tipo': 'Cadastro', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def editar_curso_campus(request, pk, pk_campus):
   curso = get_object_or_404(CursoCampus, pk=pk)
   campus = get_object_or_404(Campus, pk=pk_campus)
+  status_code = 200
 
   if request.method == 'POST':
     form = FormCursoCampus(request.POST, instance=curso)
@@ -155,6 +172,7 @@ def editar_curso_campus(request, pk, pk_campus):
       try:
         curso_repetido = campus.cursos.exclude(pk=pk).get(curso=form.cleaned_data['curso'])
         messages.error(request, 'Este curso já foi cadastrado neste câmpus.')
+        status_code = 400
       except:
         try:
           campus.cursos.add(form.save())
@@ -162,23 +180,27 @@ def editar_curso_campus(request, pk, pk_campus):
           return redirect('cadastros:detalhes_campus', campus.pk)
         except:
           messages.error(request, 'Erro ao tentar editar o curso. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar editar o curso. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
   else:
     form = FormCursoCampus(instance=curso)
 
   return render(request, 'cadastros/cursos_campus/cadastro.html', {
     'tipo': 'Edição', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def deletar_curso_campus(request, pk, pk_campus):
   curso = get_object_or_404(CursoCampus, pk=pk)
+  status_code = 200
 
   try:
     curso.delete()
     messages.success(request, 'Curso deletado com sucesso.')
   except:
     messages.error(request, 'Erro ao tentar deletar o curso. Tente novamente mais tarde.')
+    status_code = 400
 
-  return redirect('cadastros:detalhes_campus', pk_campus)
+  return redirect('cadastros:detalhes_campus', pk_campus, status=status_code)
