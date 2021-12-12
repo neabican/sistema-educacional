@@ -21,6 +21,7 @@ INSTALLED_APPS = [
   # Third-Party apps
   'crispy_forms',
   'ckeditor',
+  'rest_framework'
 ]
 
 AUTH_USER_MODEL = 'usuarios.CustomUser'
@@ -70,6 +71,12 @@ DATABASES = {
           'NAME': DB_TEST,
         }
     }
+}
+
+REST_FRAMEWORK = {
+  'DEFAULT_AUTHENTICATION_CLASSES': [
+    'rest_framework.authentication.TokenAuthentication',
+  ],
 }
 
 AUTH_PASSWORD_VALIDATORS = [

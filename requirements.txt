@@ -3,3 +3,6 @@ mysqlclient
 Pillow
 django-crispy-forms
 django-ckeditor
+djangorestframework
+markdown
+django-filter
