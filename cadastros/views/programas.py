@@ -9,6 +9,7 @@ from ..forms import FormPrograma
 def cadastrar_programa(request, pk_campus):
   campus = get_object_or_404(Campus, pk=pk_campus)
   form = FormPrograma(request.POST or None)
+  status_code = 200
 
   if request.method == 'POST':
     if form.is_valid():
@@ -18,6 +19,7 @@ def cadastrar_programa(request, pk_campus):
           campus=campus
         )
         messages.error(request, 'Esse programa já foi cadastrado no câmpus.')
+        status_code = 400
       except:
         try:
           programa = form.save(commit=False)
@@ -28,17 +30,20 @@ def cadastrar_programa(request, pk_campus):
           return redirect('cadastros:detalhes_campus', pk_campus)
         except:
           messages.error(request, 'Erro ao tentar cadastrar o programa. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar cadastrar o programa. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
 
   return render(request, 'cadastros/programas/cadastro.html', {
     'tipo': 'Cadastro', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def editar_programa(request, pk, pk_campus):
   programa = get_object_or_404(Programa, pk=pk)
   campus = get_object_or_404(Campus, pk=pk_campus)
+  status_code = 200
 
   if request.method == 'POST':
     form = FormPrograma(request.POST, instance=programa)
@@ -50,6 +55,7 @@ def editar_programa(request, pk, pk_campus):
           campus=campus
         )
         messages.error(request, 'Esse programa já foi cadastrado no câmpus.')
+        status_code = 400
       except:
         try:
           form.save()
@@ -58,14 +64,16 @@ def editar_programa(request, pk, pk_campus):
           return redirect('cadastros:detalhes_campus', pk_campus)
         except:
           messages.error(request, 'Erro ao tentar editar o programa. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar editar o programa. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
   else:
     form = FormPrograma(instance=programa)
 
   return render(request, 'cadastros/programas/cadastro.html', {
     'tipo': 'Edição', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def deletar_programa(request, pk, pk_campus):
