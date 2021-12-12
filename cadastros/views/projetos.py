@@ -9,6 +9,7 @@ from ..forms import FormProjeto
 def cadastrar_projeto(request, pk_campus):
   campus = get_object_or_404(Campus, pk=pk_campus)
   form = FormProjeto(request.POST or None)
+  status_code = 200
 
   if request.method == 'POST':
     if form.is_valid():
@@ -18,6 +19,7 @@ def cadastrar_projeto(request, pk_campus):
           campus=campus
         )
         messages.error(request, 'Esse projeto já foi cadastrado no câmpus.')
+        status_code = 400
       except:
         try:
           projeto = form.save(commit=False)
@@ -28,17 +30,20 @@ def cadastrar_projeto(request, pk_campus):
           return redirect('cadastros:detalhes_campus', pk_campus)
         except:
           messages.error(request, 'Erro ao tentar cadastrar o projeto. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar cadastrar o projeto. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
 
   return render(request, 'cadastros/projetos/cadastro.html', {
     'tipo': 'Cadastro', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def editar_projeto(request, pk, pk_campus):
   projeto = get_object_or_404(Projeto, pk=pk)
   campus = get_object_or_404(Campus, pk=pk_campus)
+  status_code = 200
 
   if request.method == 'POST':
     form = FormProjeto(request.POST, instance=projeto)
@@ -50,6 +55,7 @@ def editar_projeto(request, pk, pk_campus):
           campus=campus
         )
         messages.error(request, 'Esse projeto já foi cadastrado no câmpus.')
+        status_code = 400
       except:
         try:
           form.save()
@@ -58,14 +64,16 @@ def editar_projeto(request, pk, pk_campus):
           return redirect('cadastros:detalhes_campus', pk_campus)
         except:
           messages.error(request, 'Erro ao tentar editar o projeto. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar editar o projeto. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
   else:
     form = FormProjeto(instance=projeto)
 
   return render(request, 'cadastros/projetos/cadastro.html', {
     'tipo': 'Edição', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def deletar_projeto(request, pk, pk_campus):
