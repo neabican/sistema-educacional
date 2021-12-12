@@ -9,6 +9,7 @@ from ..forms import FormAcaoAfirmativa
 def cadastrar_acao_afirmativa(request, pk_campus):
   campus = get_object_or_404(Campus, pk=pk_campus)
   form = FormAcaoAfirmativa(request.POST or None)
+  status_code = 200
 
   if request.method == 'POST':
     if form.is_valid():
@@ -18,6 +19,7 @@ def cadastrar_acao_afirmativa(request, pk_campus):
           campus=campus
         )
         messages.error(request, 'Essa ação afirmativa já foi cadastrada no câmpus.')
+        status_code = 400
       except:
         try:
           acao_afirmativa = form.save(commit=False)
@@ -28,17 +30,20 @@ def cadastrar_acao_afirmativa(request, pk_campus):
           return redirect('cadastros:detalhes_campus', pk_campus)
         except:
           messages.error(request, 'Erro ao tentar cadastrar a ação afirmativa. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar cadastrar a ação afirmativa. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
 
   return render(request, 'cadastros/acoes_afirmativas/cadastro.html', {
     'tipo': 'Cadastro', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def editar_acao_afirmativa(request, pk, pk_campus):
   acao_afirmativa = get_object_or_404(AcaoAfirmativa, pk=pk)
   campus = get_object_or_404(Campus, pk=pk_campus)
+  status_code = 200
 
   if request.method == 'POST':
     form = FormAcaoAfirmativa(request.POST, instance=acao_afirmativa)
@@ -50,6 +55,7 @@ def editar_acao_afirmativa(request, pk, pk_campus):
           campus=campus
         )
         messages.error(request, 'Essa ação afirmativa já foi cadastrada no câmpus.')
+        status_code = 400
       except:
         try:
           form.save()
@@ -58,14 +64,16 @@ def editar_acao_afirmativa(request, pk, pk_campus):
           return redirect('cadastros:detalhes_campus', pk_campus)
         except:
           messages.error(request, 'Erro ao tentar editar a ação afirmativa. Tente novamente mais tarde.')
+          status_code = 400
     else:
       messages.error(request, 'Erro ao tentar editar a ação afirmativa. Verifique se todos campos foram preenchidos corretamente.')
+      status_code = 400
   else:
     form = FormAcaoAfirmativa(instance=acao_afirmativa)
 
   return render(request, 'cadastros/acoes_afirmativas/cadastro.html', {
     'tipo': 'Edição', 'form': form
-  })
+  }, status=status_code)
 
 @login_required
 def deletar_acao_afirmativa(request, pk, pk_campus):
