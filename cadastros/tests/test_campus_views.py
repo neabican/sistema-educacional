@@ -173,6 +173,7 @@ class CampusTestCase(TransactionTestCase):
 
   def test_editar_curso_campus(self):
     campus = Campus.objects.get(nome='Câmpus Canoinhas', instituicao__pk=1)
+
     curso_campus = CursoCampus.objects.create(
       curso=Curso.objects.get(pk=1), 
       campus=campus, 
@@ -193,28 +194,30 @@ class CampusTestCase(TransactionTestCase):
     )
     self.assertEqual(response.status_code, 302)
 
-    CursoCampus.objects.create(
-      curso=Curso.objects.get(pk=1), 
-      campus=campus, 
-      link='https://google.com.br'
+    campus.cursos.add(
+      CursoCampus.objects.create(
+        curso=Curso.objects.get(pk=3), 
+        campus=campus, 
+        link='https://google.com.br'
+      )
     )
 
     dados = {
-      'curso': 1,
+      'curso': 3,
       'link': 'https://facebook.com.br'
     }
 
     # Tentando editar um curso que já foi cadastro no câmpus
-    # response = self.client.post(
-    #   reverse(
-    #     'cadastros:editar_curso_campus', 
-    #     kwargs={'pk': curso_campus.pk, 'pk_campus': campus.pk}
-    #   ), dados
-    # )
-    # self.assertEqual(response.status_code, 400)
+    response = self.client.post(
+      reverse(
+        'cadastros:editar_curso_campus', 
+        kwargs={'pk': curso_campus.pk, 'pk_campus': campus.pk}
+      ), dados
+    )
+    self.assertEqual(response.status_code, 400)
 
     dados = {
-      'curso': 3,
+      'curso': 1,
       'link': 'https://facebook.com.br'
     }
 
@@ -250,3 +253,38 @@ class CampusTestCase(TransactionTestCase):
       ), dados
     )
     self.assertEqual(response.status_code, 400)
+
+  def test_deletar_curso_campus_(self):
+    campus = Campus.objects.get(nome='Câmpus Canoinhas', instituicao__pk=1)
+
+    curso_campus = CursoCampus.objects.create(
+      curso=Curso.objects.get(pk=1), 
+      campus=campus, 
+      link='https://google.com.br'
+    )
+
+    campus.cursos.add(curso_campus)
+    self.assertIs(CursoCampus.objects.all().count(), 1)
+
+    # # Deletando um curso de um Câmpus
+    # response = self.client.post(reverse(
+    #   'cadastros:deletar_curso_campus', 
+    #   kwargs={'pk': curso_campus.pk, 'pk_campus': campus.pk}
+    # ))
+    # self.assertEqual(response.status_code, 302)
+    # self.assertIs(CursoCampus.objects.all().count(), 0)
+
+    # # Tentando deletar um curso inexistente de um câmpus
+    # response = self.client.post(reverse(
+    #   'cadastros:deletar_curso_campus', 
+    #   kwargs={'pk': 999, 'pk_campus': campus.pk}
+    # ))
+    # self.assertEqual(response.status_code, 404)
+
+    # # Tentando deletar um curso de um câmpus inexistente
+    # response = self.client.post(reverse(
+    #   'cadastros:deletar_curso_campus', 
+    #   kwargs={'pk': curso_campus.pk, 'pk_campus': 999}
+    # ))
+    # self.assertEqual(response.status_code, 404)
+  
