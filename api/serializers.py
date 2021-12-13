@@ -27,11 +27,28 @@ class CampusSerializer(serializers.Serializer):
   nome = serializers.CharField(max_length=300)
   instituicao = InstituicaoSerializer()
   endereco = EnderecoSerializer()
-  # cursos = CursoCampusSerializer()
+  cursos = CursoCampusSerializer(many=True)
 
-class ProgramaSerializer(serializers.Serializer):
-  pk = serializers.IntegerField()
-  nome = serializers.CharField(max_length=300)
-  descricao = serializers.CharField()
-  link = serializers.CharField(max_length=500)
-  campus = CampusSerializer()
+class ProgramaSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Programa
+    fields = [
+      'pk', 'nome', 'descricao', 
+      'link', 'campus'
+    ]
+
+class ProjetoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Projeto
+    fields = [
+      'pk', 'nome', 'descricao', 
+      'link', 'campus'
+    ]
+
+class AcaoAfirmativaSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = AcaoAfirmativa
+    fields = [
+      'pk', 'nome', 'descricao', 
+      'link', 'campus'
+    ]
