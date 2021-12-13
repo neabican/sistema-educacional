@@ -5,28 +5,29 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
-from ..serializers import CampusSerializer
+from ..serializers import ProgramaSerializer
 from cadastros.models import *
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def listar_campus(request):
+def listar_programas(request, pk_campus):
   if request.method == 'GET':
-    campus = Campus.objects.all()
-    serializador = CampusSerializer(campus, many=True)
+    programas = Programa.objects.filter(campus__pk=pk_campus)
+    serializador = ProgramaSerializer(programas, many=True)
 
     return Response(serializador.data)
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
-def detalhes_campus(request, pk):
+def detalhes_programa(request, pk, pk_campus):
   if request.method == 'GET':
     try:
-      campus = Campus.objects.get(pk=pk)
-      serializador = CampusSerializer(campus)
+      programa = Programa.objects.get(pk=pk, campus__pk=pk_campus)
+      serializador = ProgramaSerializer(programa)
 
       return Response(serializador.data)
     except:
       return Response(None, status=404)
+    
