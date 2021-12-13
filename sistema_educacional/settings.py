@@ -21,7 +21,8 @@ INSTALLED_APPS = [
   # Third-Party apps
   'crispy_forms',
   'ckeditor',
-  'rest_framework'
+  'rest_framework',
+  'rest_framework.authtoken',
 ]
 
 AUTH_USER_MODEL = 'usuarios.CustomUser'

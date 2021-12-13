@@ -4,7 +4,7 @@ def gerar_paginacao(request, resultados, num_resultados):
   paginator = Paginator(resultados, num_resultados)
 
   try:
-    page = int(request.GET.get('page', '1'))
+    page = int(request.GET.get('pagina', '1'))
   except:
     page = 1
   try:
