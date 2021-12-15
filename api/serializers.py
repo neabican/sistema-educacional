@@ -1,33 +1,30 @@
 from rest_framework import serializers
 from cadastros.models import *
 
-class InstituicaoSerializer(serializers.Serializer):
-  pk = serializers.IntegerField()
-  nome = serializers.CharField(max_length=250)
+class InstituicaoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Instituicao
+    fields = ['pk', 'nome']
 
-class EnderecoSerializer(serializers.Serializer):
-  cidade = serializers.CharField(max_length=100)
-  estado = serializers.CharField(max_length=50)
-  logradouro = serializers.CharField(max_length=300)
-  numero = serializers.CharField(max_length=10)
-  cep = serializers.CharField(max_length=10)
-  latitude = serializers.DecimalField(max_digits=22, decimal_places=16)
-  longitude = serializers.DecimalField(max_digits=22, decimal_places=16)
+class CursoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Curso
+    fields = ['nome', 'descricao']
 
-class CursoSerializer(serializers.Serializer):
-  nome = serializers.CharField(max_length=250)
-  descricao = serializers.CharField()
-
-class CursoCampusSerializer(serializers.Serializer):
+class CursoCampusSerializer(serializers.ModelSerializer):
   curso = CursoSerializer()
-  link = serializers.CharField(max_length=500)
 
-class CampusSerializer(serializers.Serializer):
-  pk = serializers.IntegerField()
-  nome = serializers.CharField(max_length=300)
-  instituicao = InstituicaoSerializer()
-  endereco = EnderecoSerializer()
-  cursos = CursoCampusSerializer(many=True)
+  class Meta:
+    model = CursoCampus
+    fields = ['pk', 'link', 'curso']
+
+class EnderecoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Endereco
+    fields = [
+      'cidade', 'estado', 'logradouro',
+      'numero', 'cep', 'latitude', 'longitude',
+    ]
 
 class ProgramaSerializer(serializers.ModelSerializer):
   class Meta:
@@ -52,3 +49,10 @@ class AcaoAfirmativaSerializer(serializers.ModelSerializer):
       'pk', 'nome', 'descricao', 
       'link', 'campus'
     ]
+
+class CampusSerializer(serializers.Serializer):
+  pk = serializers.IntegerField()
+  nome = serializers.CharField(max_length=300)
+  instituicao = InstituicaoSerializer()
+  endereco = EnderecoSerializer()
+  cursos = CursoCampusSerializer(many=True)
