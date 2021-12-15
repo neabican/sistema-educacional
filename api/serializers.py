@@ -50,9 +50,27 @@ class AcaoAfirmativaSerializer(serializers.ModelSerializer):
       'link', 'campus'
     ]
 
-class CampusSerializer(serializers.Serializer):
-  pk = serializers.IntegerField()
-  nome = serializers.CharField(max_length=300)
+class CampusSerializer(serializers.ModelSerializer):
   instituicao = InstituicaoSerializer()
   endereco = EnderecoSerializer()
   cursos = CursoCampusSerializer(many=True)
+  programas = serializers.SerializerMethodField()
+  projetos = serializers.SerializerMethodField()
+  acoes_afirmativas = serializers.SerializerMethodField()
+
+  def get_programas(self, obj):
+    return ProgramaSerializer(Programa.objects.filter(campus=obj), many=True).data
+
+  def get_projetos(self, obj):
+    return ProjetoSerializer(Projeto.objects.filter(campus=obj), many=True).data
+
+  def get_acoes_afirmativas(self, obj):
+    return AcaoAfirmativaSerializer(AcaoAfirmativa.objects.filter(campus=obj), many=True).data
+
+  class Meta:
+    model = Campus
+    fields = [
+      'pk', 'nome', 'instituicao',
+      'endereco', 'cursos', 'programas',
+      'projetos', 'acoes_afirmativas',
+    ]
