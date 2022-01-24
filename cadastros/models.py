@@ -1,6 +1,11 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from PIL import Image
+from io import BytesIO
+import sys
+
 class Instituicao(models.Model):
   nome = models.CharField(max_length=250, unique=True)
 
@@ -92,9 +97,35 @@ class AcaoAfirmativa(models.Model):
 
 class Campus(models.Model):
   nome = models.CharField(max_length=300)
+  foto = models.ImageField(blank=True, default=None, upload_to='fotos_campus/')
   endereco = models.ForeignKey('Endereco', on_delete=models.PROTECT)
   instituicao = models.ForeignKey('Instituicao', on_delete=models.PROTECT)
   cursos = models.ManyToManyField('CursoCampus')
 
   def __str__(self):
     return self.nome
+
+  def save(self, arquivo_antigo, *args, **kwargs):
+    if self.foto:
+      if self.foto != arquivo_antigo:
+        im = Image.open(self.foto)
+
+        if (im.format == 'RGBA'):
+          im = im.convert('RGB')
+
+        output = BytesIO()
+        im.thumbnail((300, 300), Image.ANTIALIAS)
+
+        im.save(output, format='PNG', quality=100)
+        output.seek(0)
+
+        self.foto = InMemoryUploadedFile(
+          output, 
+          'ImageField', 
+          "%s.jpg" %self.foto.name.split('.')[0], 
+          'image/jpeg', 
+          sys.getsizeof(output), 
+          None
+        )
+    
+    super(Campus, self).save()

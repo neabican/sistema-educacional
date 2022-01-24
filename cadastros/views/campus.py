@@ -53,10 +53,14 @@ def cadastrar_campus(request):
         # Caso não seja um câmpus repetido, tenta cadastrá-lo
         try:
           campus = form.save(commit=False)
-          endereco = form_endereco.save()
 
+          endereco = form_endereco.save()
           campus.endereco = endereco
-          campus.save()
+
+          arquivo_antigo = ''
+          campus.foto = request.FILES.get('foto')
+
+          campus.save(arquivo_antigo)
           messages.success(request, 'Câmpus cadastrado com sucesso.')
 
           return redirect('cadastros:campus')
@@ -93,10 +97,14 @@ def editar_campus(request, pk):
         # Caso não seja um câmpus repetido, tenta cadastrá-lo
         try:
           campus = form.save(commit=False)
-          endereco = form_endereco.save()
 
+          endereco = form_endereco.save()
           campus.endereco = endereco
-          campus.save()
+          
+          arquivo_antigo = campus.foto
+          campus.foto = request.FILES.get('foto')
+
+          campus.save(arquivo_antigo)
           messages.success(request, 'Câmpus editado com sucesso.')
 
           return redirect('cadastros:campus')
