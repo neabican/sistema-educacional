@@ -70,7 +70,7 @@ class CampusSerializer(serializers.ModelSerializer):
   class Meta:
     model = Campus
     fields = [
-      'pk', 'nome', 'instituicao',
+      'pk', 'nome', 'foto', 'instituicao',
       'endereco', 'cursos', 'programas',
       'projetos', 'acoes_afirmativas',
     ]
