@@ -115,7 +115,6 @@ class Campus(models.Model):
           im = im.convert('RGB')
 
         output = BytesIO()
-        im.thumbnail((300, 300), Image.ANTIALIAS)
 
         im.save(output, format='PNG', quality=100)
         output.seek(0)
