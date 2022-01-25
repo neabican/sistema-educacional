@@ -11,12 +11,13 @@ def instituicoes(request):
 
   if request.method == 'POST':
     nome = request.POST.get('nome', None)
+    sigla = request.POST.get('sigla', None)
     pk = request.POST.get('pk', None)
 
     if nome is not None and pk is None:
       # Cadastrando nova instituição
       try:
-        Instituicao.objects.create(nome=nome)
+        Instituicao.objects.create(nome=nome, sigla=sigla)
         messages.success(request, 'Instituição cadastrada com sucesso.')
         status_code = 201
       except:
@@ -29,6 +30,7 @@ def instituicoes(request):
 
         try:
           instituicao.nome = nome
+          instituicao.sigla = sigla
           instituicao.save()
           
           messages.success(request, 'Instituição editada com sucesso.')

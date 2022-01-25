@@ -19,6 +19,7 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Nome</th>
+            <th scope="col">Sigla</th>
             <th scope="col">Nº de Câmpus</th>
             <th scope="col">Ações</th>
           </tr>
@@ -28,6 +29,7 @@
             <tr>
               <td>{{ instituicao.id }}</td>
               <td>{{ instituicao.nome }}</td>
+              <td>{{ instituicao.sigla }}</td>
               <td>{{ instituicao.numero_campus }}</td>
               <td>
                 <ul class="list-inline mb-0">
@@ -39,7 +41,7 @@
                       data-bs-placement="top" 
                       data-toggle="modal" 
                       data-target="#modal-edicao"
-                      onclick="abrirModalEdicao('{{ instituicao.nome }}', '{{ instituicao.pk }}')"
+                      onclick="abrirModalEdicao('{{ instituicao.nome }}', '{{ instituicao.sigla }}', '{{ instituicao.pk }}')"
                       title="Editar"
                     >
                       <i class="bx bx-edit"></i>
@@ -87,6 +89,9 @@
 
             <label for="nome" class="mb-1">Nome</label>
             <input type="text" name="nome" id="nome" class="form-control">
+
+            <label for="sigla" class="mb-1">Sigla</label>
+            <input type="text" name="sigla" id="sigla" class="form-control">
           </form>
         </div>
         <div class="modal-footer">
@@ -117,6 +122,9 @@
 
             <label for="nome-edicao" class="mb-1">Nome</label>
             <input type="text" name="nome" id="nome-edicao" class="form-control">
+
+            <label for="sigla-edicao" class="mb-1">Sigla</label>
+            <input type="text" name="sigla" id="sigla-edicao" class="form-control">
 
             <input type="text" name="pk" id="pk-edicao" class="d-none">
           </form>
