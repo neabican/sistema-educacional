@@ -4,7 +4,7 @@ from cadastros.models import *
 class InstituicaoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Instituicao
-    fields = ['pk', 'nome']
+    fields = ['pk', 'nome', 'sigla']
 
 class CursoSerializer(serializers.ModelSerializer):
   class Meta:
