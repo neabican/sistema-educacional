@@ -23,6 +23,7 @@ INSTALLED_APPS = [
   'ckeditor',
   'rest_framework',
   'rest_framework.authtoken',
+  'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'usuarios.CustomUser'
@@ -38,7 +39,14 @@ MIDDLEWARE = [
   'django.contrib.auth.middleware.AuthenticationMiddleware',
   'django.contrib.messages.middleware.MessageMiddleware',
   'django.middleware.clickjacking.XFrameOptionsMiddleware',
+  'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:3000',
+)
 
 ROOT_URLCONF = 'sistema_educacional.urls'
 
