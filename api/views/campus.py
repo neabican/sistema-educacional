@@ -13,7 +13,11 @@ from cadastros.models import *
 @permission_classes([IsAuthenticated])
 def listar_campus(request):
   if request.method == 'GET':
-    campus = Campus.objects.all()
+    if 'campus' in request.GET:
+      campus = Campus.objects.filter(nome__contains=request.GET.get('campus'))
+    else:
+      campus = Campus.objects.all()
+
     serializador = CampusSerializer(campus, many=True)
 
     return Response(serializador.data)
