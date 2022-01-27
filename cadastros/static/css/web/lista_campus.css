@@ -3,6 +3,7 @@ body {
   max-width: 1020px;
   margin: 0 auto;
   padding: 4rem 1rem;
+  background-color: #F9F9F9;
 }
 
 header {
@@ -62,6 +63,31 @@ header {
   align-items: center;
 
   gap: 0.5rem;
+}
+
+#btn-carregar-resultados {
+  width: max-content;
+  margin: 1.5rem auto 0 auto;
+
+  border: 0;
+  background-color: #F9F9F9;
+
+  color: #32A041;
+}
+
+.spin {
+  font-size: 1.3rem;
+
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
 }
 
 @media (max-width: 720px) {

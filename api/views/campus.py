@@ -9,22 +9,20 @@ from ..serializers import CampusSerializer
 from cadastros.models import *
 
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 def listar_campus(request):
   if request.method == 'GET':
+    pag_atual = int(request.GET.get('pag')) * 10
+
     if 'campus' in request.GET:
-      campus = Campus.objects.filter(nome__contains=request.GET.get('campus'))
+      campus = Campus.objects.filter(nome__contains=request.GET.get('campus'))[pag_atual:pag_atual + 10]
     else:
-      campus = Campus.objects.all()
+      campus = Campus.objects.all()[pag_atual:pag_atual + 10]
 
     serializador = CampusSerializer(campus, many=True)
 
     return Response(serializador.data)
 
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 def detalhes_campus(request, pk):
   if request.method == 'GET':
     try:
