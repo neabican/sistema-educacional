@@ -20,6 +20,15 @@
       crossorigin="anonymous"
     />
 
+    <!-- CSS do Mapa -->
+    <link 
+      rel="stylesheet" 
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="{% static 'css/map.css' %}">
+
     <!-- CSS do projeto -->
     <link rel="stylesheet" href="{% static 'css/web/detalhes_campus.css' %}">
 
@@ -239,8 +248,33 @@
             </div>
           </div>
         {% endif %}
+
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="header-accordion-mapa">
+            <button 
+              class="accordion-button bg-light text-dark px-0" 
+              type="button" 
+              data-bs-toggle="collapse" 
+              data-bs-target="#accordion-mapa" 
+              aria-expanded="true" 
+              aria-controls="accordion-mapa"
+            >
+              <h4 class="mb-0">Mapa</h4>
+            </button>
+          </h3>
+
+          <div id="accordion-mapa" class="accordion-collapse collapse show" aria-labelledby="header-accordion-mapa">
+            <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
+              <div class="card card-body p-0">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>      
     </main>
+
+    {{ coordenadas|json_script:"coordenadas" }}
 
     <!-- JS Bootstrap 5 -->
     <script 
@@ -249,7 +283,14 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- JS do Mapa -->
+    <script 
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+
     <!-- JS do projeto -->
-    <script src="{% static 'javascript/web/listar_campus.js' %}"></script>
+    <script src="{% static 'javascript/web/detalhes_campus.js' %}"></script>    
   </body>
 </html>

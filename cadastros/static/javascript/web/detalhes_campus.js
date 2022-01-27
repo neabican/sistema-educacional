@@ -26,11 +26,3 @@ function abrirModalInformacoes(nome, descricao, link) {
     document.getElementById('info-link').href = '#';
   }
 }
-
-function abrirModalDelecao(event, tipo) {
-  // Buscando a URL para a deleção do registro através do ID
-  const url = event.target.id ? event.target.id : event.target.parentNode.id;
-  
-  document.getElementById('button-submit').href = url;
-  document.getElementById('modal-delecao-label').textContent = `Deletar ${tipo}`;
-}
