@@ -17,6 +17,7 @@ INSTALLED_APPS = [
   'usuarios',
   'cadastros',
   'api',
+  'web',
   
   # Third-Party apps
   'crispy_forms',

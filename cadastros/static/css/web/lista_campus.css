@@ -1,0 +1,88 @@
+body {
+  font-family: 'Poppins' sans-serif;
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+header {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.btn-pesquisa {
+  background-color: #32A041;
+
+  transition: filter 0.2s;
+}
+
+.btn-pesquisa:hover {
+  filter: brightness(0.9);
+}
+
+.card-campus {
+  width: 100%;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  
+  text-decoration: none;
+  color: #fff;
+  border-radius: 0.3rem;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  transition: filter 0.2s;
+}
+
+.card-campus:hover {
+  text-decoration: none;
+  color: #fff;
+
+  filter: brightness(0.9);
+}
+
+.card-campus h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.info-campus {
+  display: flex;
+  align-items: center;
+
+  gap: 1.5rem;
+}
+
+.info-campus span {
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+@media (max-width: 720px) {
+  header {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-campus {
+    height: 300px;
+  }
+
+  .card-campus h2 {
+    font-size: 1.6rem;
+  }
+
+  .info-campus {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 0.5rem;
+  }
+}
