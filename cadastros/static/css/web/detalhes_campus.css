@@ -1,0 +1,36 @@
+body {
+  font-family: 'Poppins' sans-serif;
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+  background-color: #F9F9F9;
+  color: #313131;
+}
+
+.bg-light {
+  background-color: #F9F9F9;
+}
+
+.img-campus {
+  max-width: 100%;
+
+  object-fit: cover;
+  border-radius: 0.3rem;
+}
+
+.link-site {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  
+  gap: 0.5rem;
+
+  text-decoration: none !important;
+  color: #313131;
+
+  transition: color 0.2s;
+}
+
+.link-site:hover {
+  color: #32A041;
+}
