@@ -5,7 +5,7 @@ from django.contrib import messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ['testserver', '127.0.0.1', ]
+ALLOWED_HOSTS = ['.pythonanywhere', 'testserver', '127.0.0.1', ]
 
 INSTALLED_APPS = [
   'django.contrib.admin',
@@ -18,7 +18,7 @@ INSTALLED_APPS = [
   'cadastros',
   'api',
   'web',
-  
+
   # Third-Party apps
   'crispy_forms',
   'ckeditor',
