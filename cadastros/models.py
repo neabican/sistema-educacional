@@ -99,6 +99,7 @@ class AcaoAfirmativa(models.Model):
 class Campus(models.Model):
   nome = models.CharField(max_length=300)
   foto = models.ImageField(blank=True, default=None, upload_to='fotos_campus/')
+  link = models.CharField(max_length=500, default='')
   endereco = models.ForeignKey('Endereco', on_delete=models.PROTECT)
   instituicao = models.ForeignKey('Instituicao', on_delete=models.PROTECT)
   cursos = models.ManyToManyField('CursoCampus')

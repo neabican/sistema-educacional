@@ -28,7 +28,7 @@ class FormCurso(ModelForm):
 class FormCampus(ModelForm):
   class Meta:
     model = Campus
-    fields = ['nome', 'instituicao', 'foto',]
+    fields = ['nome', 'instituicao', 'foto', 'link',]
 
   def __init__(self, *args, **kwargs):
     super(FormCampus, self).__init__(*args, **kwargs)
@@ -42,6 +42,7 @@ class FormCampus(ModelForm):
       ),
       Row(
         Column('foto', css_class='col-xl-3'),
+        Column('link', css_class='col-xl-9'),
       )
     )
 
