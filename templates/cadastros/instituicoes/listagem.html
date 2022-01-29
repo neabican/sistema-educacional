@@ -2,149 +2,135 @@
 {% load static %}
 
 {% block content %}
-  {% include 'utilitarios/mensagens.html'%}
+{% include 'utilitarios/mensagens.html'%}
 
-  <div class="d-flex justify-content-between mb-3">
-    <h3 class="mb-0">Instituições</h3>
+<div class="d-flex justify-content-between mb-3">
+  <h3 class="mb-0">Instituições</h3>
 
-    <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-cadastro">
-      Cadastrar Instituição
-    </a>
+  <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-cadastro">
+    Cadastrar Instituição
+  </a>
+</div>
+
+<div class="card card-body shadow pb-1">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Sigla</th>
+          <th scope="col">Nº de Câmpus</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for instituicao in instituicoes %}
+        <tr>
+          <td>{{ instituicao.id }}</td>
+          <td>{{ instituicao.nome }}</td>
+          <td>{{ instituicao.sigla }}</td>
+          <td>{{ instituicao.numero_campus }}</td>
+          <td>
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item">
+                <a href="#" class="table-link" data-bs-toggle="tooltip" data-bs-placement="top" data-toggle="modal"
+                  data-target="#modal-edicao"
+                  onclick="abrirModalEdicao('{{ instituicao.nome }}', '{{ instituicao.sigla }}', '{{ instituicao.pk }}')"
+                  title="Editar">
+                  <i class="bx bx-edit"></i>
+                </a>
+              </li>
+
+              <li class="list-inline-item">
+                <a href="#" class="table-link" data-bs-toggle="tooltip" data-bs-placement="top" data-toggle="modal"
+                  data-target="#modal-delecao" onclick="abrirModalDelecao('{{ instituicao.pk }}')" title="Deletar">
+                  <i class="bx bx-trash-alt"></i>
+                </a>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 
-  <div class="card card-body shadow pb-1">
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Sigla</th>
-            <th scope="col">Nº de Câmpus</th>
-            <th scope="col">Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for instituicao in instituicoes %}
-            <tr>
-              <td>{{ instituicao.id }}</td>
-              <td>{{ instituicao.nome }}</td>
-              <td>{{ instituicao.sigla }}</td>
-              <td>{{ instituicao.numero_campus }}</td>
-              <td>
-                <ul class="list-inline mb-0">
-                  <li class="list-inline-item">
-                    <a 
-                      href="#" 
-                      class="table-link" 
-                      data-bs-toggle="tooltip" 
-                      data-bs-placement="top" 
-                      data-toggle="modal" 
-                      data-target="#modal-edicao"
-                      onclick="abrirModalEdicao('{{ instituicao.nome }}', '{{ instituicao.sigla }}', '{{ instituicao.pk }}')"
-                      title="Editar"
-                    >
-                      <i class="bx bx-edit"></i>
-                    </a>
-                  </li>
+  {% include 'utilitarios/paginador_tabela.html' with resultados=instituicoes paginas=paginas %}
+</div>
 
-                  <li class="list-inline-item">
-                    <a 
-                      href="#" 
-                      class="table-link" 
-                      data-bs-toggle="tooltip" 
-                      data-bs-placement="top" 
-                      data-toggle="modal" 
-                      data-target="#modal-delecao"
-                      onclick="abrirModalDelecao('{{ instituicao.pk }}')"
-                      title="Deletar"
-                    >
-                      <i class="bx bx-trash-alt"></i>
-                    </a>
-                  </li>
-                </ul>
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+<!-- Modal de cadastro -->
+<div class="modal fade" id="modal-cadastro" tabindex="-1" aria-labelledby="modal-cadastro-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-cadastro-label">Cadastrar nova instituição</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" id="form-cadastro">
+          {% csrf_token %}
 
-    {% include 'utilitarios/paginador_tabela.html' with resultados=instituicoes paginas=paginas %}
-  </div>
+          <label for="nome" class="mb-1">Nome</label>
+          <input type="text" name="nome" id="nome" class="form-control mb-2">
 
-  <!-- Modal de cadastro -->
-  <div class="modal fade" id="modal-cadastro" tabindex="-1" aria-labelledby="modal-cadastro-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-cadastro-label">Cadastrar nova instituição</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="POST" id="form-cadastro">
-            {% csrf_token %}
-
-            <label for="nome" class="mb-1">Nome</label>
-            <input type="text" name="nome" id="nome" class="form-control">
-
-            <label for="sigla" class="mb-1">Sigla</label>
-            <input type="text" name="sigla" id="sigla" class="form-control">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
-            Cancelar
-          </button>
-          <button type="submit" form="form-cadastro" class="btn btn-sm btn-primary">
-            Cadastrar
-          </button>
-        </div>
+          <label for="sigla" class="mb-1">Sigla</label>
+          <input type="text" name="sigla" id="sigla" class="form-control">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="submit" form="form-cadastro" class="btn btn-sm btn-primary">
+          Cadastrar
+        </button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal de edição -->
-  <div class="modal fade" id="modal-edicao" tabindex="-1" aria-labelledby="modal-edicao-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-edicao-label">Editar instituição</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form method="POST" id="form-edicao">
-            {% csrf_token %}
+<!-- Modal de edição -->
+<div class="modal fade" id="modal-edicao" tabindex="-1" aria-labelledby="modal-edicao-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-edicao-label">Editar instituição</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" id="form-edicao">
+          {% csrf_token %}
 
-            <label for="nome-edicao" class="mb-1">Nome</label>
-            <input type="text" name="nome" id="nome-edicao" class="form-control">
+          <label for="nome-edicao" class="mb-1">Nome</label>
+          <input type="text" name="nome" id="nome-edicao" class="form-control mb-2">
 
-            <label for="sigla-edicao" class="mb-1">Sigla</label>
-            <input type="text" name="sigla" id="sigla-edicao" class="form-control">
+          <label for="sigla-edicao" class="mb-1">Sigla</label>
+          <input type="text" name="sigla" id="sigla-edicao" class="form-control">
 
-            <input type="text" name="pk" id="pk-edicao" class="d-none">
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
-            Cancelar
-          </button>
-          <button type="submit" form="form-edicao" class="btn btn-sm btn-primary">
-            Editar
-          </button>
-        </div>
+          <input type="text" name="pk" id="pk-edicao" class="d-none">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="submit" form="form-edicao" class="btn btn-sm btn-primary">
+          Editar
+        </button>
       </div>
     </div>
   </div>
+</div>
 
-  {% include "utilitarios/modal_delecao.html" with tipo="Instituição" %}
+{% include "utilitarios/modal_delecao.html" with tipo="Instituição" %}
 {% endblock %}
 
 {% block javascript %}
-  <script src="{% static 'javascript/instituicao/instituicao.js' %}"></script>
-  <script src="{% static 'javascript/utils/modalDelecao.js' %}"></script>
+<script src="{% static 'javascript/instituicao/instituicao.js' %}"></script>
+<script src="{% static 'javascript/utils/modalDelecao.js' %}"></script>
 {% endblock %}
