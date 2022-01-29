@@ -5,11 +5,7 @@ from django.contrib import messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['.pythonanywhere', 'testserver', '127.0.0.1', ]
-=======
 ALLOWED_HOSTS = ['.pythonanywhere.com', 'testserver', '127.0.0.1', ]
->>>>>>> 416af8a84c155d3459f7b0c4a544d2cf002413e4
 
 INSTALLED_APPS = [
   'django.contrib.admin',
