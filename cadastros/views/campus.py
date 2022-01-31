@@ -55,7 +55,7 @@ def cadastrar_campus(request):
           campus = form.save(commit=False)
 
           try:
-            latitude, longitude = form.cleaned_data['coordenadas'].split(', ')
+            latitude, longitude = form_endereco.cleaned_data['coordenadas'].split(', ')
           except:
             messages.error(request, 'Erro ao tentar obter as coordenadas informadas.')
             status_code = 400
