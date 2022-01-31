@@ -50,9 +50,11 @@ class FormEndereco(ModelForm):
   class Meta:
     model = Endereco
     fields = [
-      'cidade', 'estado', 'logradouro', 'numero', 
-      'cep', 'latitude', 'longitude',
+      'cidade', 'estado', 'logradouro', 
+      'numero', 'cep',
     ]
+
+  coordenadas = forms.CharField(max_length=300, label='Coordenadas')
 
   def __init__(self, *args, **kwargs):
     super(FormEndereco, self).__init__(*args, **kwargs)
@@ -68,8 +70,7 @@ class FormEndereco(ModelForm):
       ),
       Row(
         Column('cep', css_class='col-xl-3'),
-        Column('latitude', css_class='col-xl-2'),
-        Column('longitude', css_class='col-xl-2'),
+        Column('coordenadas', css_class='col-xl-4'),
       )
     )
 

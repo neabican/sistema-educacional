@@ -2,35 +2,31 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  {% include 'utilitarios/mensagens.html' %}
-  
-  <h3>{{ tipo }} de Câmpus</h3>
-  <form method="POST" id="form-campus" enctype="multipart/form-data">
-    <div class="card card-body shadow mb-3">
-      <h4 class="mb-4">Dados Gerais</h4>
-      
-      {% crispy form %}
-    </div>
+{% include 'utilitarios/mensagens.html' %}
 
-    <div class="card card-body shadow mb-3">
-      <h4 class="mb-4">Endereço</h4>
-      {% crispy form_endereco %}
-    </div>
-  </form>
+<h3>{{ tipo }} de Câmpus</h3>
+<form method="POST" id="form-campus" enctype="multipart/form-data">
+  <div class="card card-body shadow mb-3">
+    <h4 class="mb-4">Dados Gerais</h4>
 
-  <div class="d-flex justify-content-end mb-3">
-    <button 
-      type="button" 
-      class="btn btn-sm btn-secondary" 
-      data-toggle="modal" 
-      data-target="#modal-cancelamento"
-    >
-      Cancelar
-    </button>
-    <button type="submit" form="form-campus" class="btn btn-sm btn-primary ml-2">
-      Cadastrar
-    </button>
+    {% crispy form %}
   </div>
 
-  {% include 'utilitarios/modal_cancelamento.html' %}
+  <div class="card card-body shadow mb-3">
+    <h4 class="mb-4">Endereço</h4>
+
+    {% crispy form_endereco %}
+  </div>
+</form>
+
+<div class="d-flex justify-content-end mb-3">
+  <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modal-cancelamento">
+    Cancelar
+  </button>
+  <button type="submit" form="form-campus" class="btn btn-sm btn-primary ml-2">
+    Cadastrar
+  </button>
+</div>
+
+{% include 'utilitarios/modal_cancelamento.html' %}
 {% endblock %}

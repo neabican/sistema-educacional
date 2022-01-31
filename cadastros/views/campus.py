@@ -54,7 +54,21 @@ def cadastrar_campus(request):
         try:
           campus = form.save(commit=False)
 
-          endereco = form_endereco.save()
+          try:
+            latitude, longitude = form.cleaned_data['coordenadas'].split(', ')
+          except:
+            messages.error(request, 'Erro ao tentar obter as coordenadas informadas.')
+            status_code = 400
+
+            return render(request, 'cadastros/campus/cadastro.html', {
+              'tipo': 'Cadastro', 'form': form, 'form_endereco': form_endereco
+            }, status=status_code)
+
+          endereco = form_endereco.save(commit=False)
+          endereco.latitude = latitude
+          endereco.longitude = longitude
+          endereco.save()
+
           campus.endereco = endereco
 
           arquivo_antigo = ''
@@ -98,11 +112,27 @@ def editar_campus(request, pk):
         try:
           campus = form.save(commit=False)
 
-          endereco = form_endereco.save()
+          try:
+            latitude, longitude = form_endereco.cleaned_data['coordenadas'].split(', ')
+          except:
+            messages.error(request, 'Erro ao tentar obter as coordenadas informadas.')
+            status_code = 400
+
+            return render(request, 'cadastros/campus/cadastro.html', {
+              'tipo': 'Cadastro', 'form': form, 'form_endereco': form_endereco
+            }, status=status_code)
+
+          endereco = form_endereco.save(commit=False)
+          endereco.latitude = latitude
+          endereco.longitude = longitude
+          endereco.save()
+          
           campus.endereco = endereco
           
           arquivo_antigo = campus.foto
-          campus.foto = request.FILES.get('foto')
+
+          if request.FILES.get('foto') is not None:
+            campus.foto = request.FILES.get('foto')
 
           campus.save(arquivo_antigo)
           messages.success(request, 'Câmpus editado com sucesso.')
@@ -116,7 +146,12 @@ def editar_campus(request, pk):
       status_code = 400
   else:
     form = FormCampus(instance=campus)
-    form_endereco = FormEndereco(instance=campus.endereco)
+
+    coordenadas = f'{str(campus.endereco.latitude)}, {str(campus.endereco.longitude)}'
+    form_endereco = FormEndereco(
+      instance=campus.endereco, 
+      initial={'coordenadas': coordenadas}
+    )
   
   return render(request, 'cadastros/campus/cadastro.html', {
     'tipo': 'Edição', 'form': form, 'form_endereco': form_endereco

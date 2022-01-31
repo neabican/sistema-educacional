@@ -14,7 +14,9 @@ def listar_campus(request):
     pag_atual = int(request.GET.get('pag')) * 10
 
     if 'campus' in request.GET:
-      campus = Campus.objects.filter(nome__contains=request.GET.get('campus'))[pag_atual:pag_atual + 10]
+      campus = Campus.objects.filter(
+        nome__contains=request.GET.get('campus')
+      )[pag_atual:pag_atual + 10]
     else:
       campus = Campus.objects.all()[pag_atual:pag_atual + 10]
 
