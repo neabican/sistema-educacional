@@ -1,9 +1,9 @@
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 from ..serializers import CampusSerializer
 from cadastros.models import *
@@ -14,8 +14,10 @@ def listar_campus(request):
     pag_atual = int(request.GET.get('pag')) * 10
 
     if 'campus' in request.GET:
+      pesquisa = request.GET.get('campus')
+
       campus = Campus.objects.filter(
-        nome__contains=request.GET.get('campus')
+        Q(nome__contains=pesquisa) | Q(instituicao__sigla__contains=pesquisa)
       )[pag_atual:pag_atual + 10]
     else:
       campus = Campus.objects.all()[pag_atual:pag_atual + 10]

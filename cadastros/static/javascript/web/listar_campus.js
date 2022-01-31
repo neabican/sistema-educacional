@@ -26,9 +26,16 @@ function renderizarCards() {
         style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${item.foto}');"
         class="card-campus shadow py-md-5 py-4 px-4"
       >
-        <h2 class="mb-3">${item.nome}</h2>
+        <h2 class="mb-3">
+          ${item.instituicao.sigla} ${item.nome}
+        </h2>
 
         <div class="info-campus">
+          <span>
+            <i class="fa fa-building"></i>
+            <span>${item.instituicao.sigla}</span>
+          </span>
+
           <span>
             <i class="fa fa-map-marker-alt"></i>
             <span>${item.endereco.cidade} - ${item.endereco.estado}</span>
@@ -113,7 +120,7 @@ btnLimparPesquisa.addEventListener('click', () => {
   pesquisa = null;
   btnLimparPesquisa.classList.add('d-none');
   inputPesquisa.value = '';
-  
+
   campus = [];
   buscarCampus();
 });

@@ -96,9 +96,9 @@ header {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 568px) {
   .card-campus {
-    height: 300px;
+    height: 280px;
   }
 
   .card-campus h2 {
