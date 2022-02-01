@@ -17,7 +17,9 @@ def listar_campus(request):
       pesquisa = request.GET.get('campus')
 
       campus = Campus.objects.filter(
-        Q(nome__contains=pesquisa) | Q(instituicao__sigla__contains=pesquisa)
+        Q(nome__contains=pesquisa) |
+        Q(instituicao__sigla__contains=pesquisa) |
+        Q(cursos__curso__nome__contains=pesquisa)
       )[pag_atual:pag_atual + 10]
     else:
       campus = Campus.objects.all()[pag_atual:pag_atual + 10]
