@@ -4,10 +4,10 @@
 {% block content %}
   {% include 'utilitarios/mensagens.html' %}
   
-  <h3>{{ tipo }} de Programa</h3>
+  <h3>{{ tipo }} de Projeto</h3>
 
   <div class="card card-body shadow mb-3">
-    <form method="POST" id="form-programa">
+    <form method="POST" id="form-projeto">
       {% crispy form %}
     </form>
   </div>
@@ -21,7 +21,7 @@
     >
       Cancelar
     </button>
-    <button type="submit" form="form-programa" class="btn btn-sm btn-primary ml-2">
+    <button type="submit" form="form-projeto" class="btn btn-sm btn-primary ml-2">
       Cadastrar
     </button>
   </div>
