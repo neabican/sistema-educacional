@@ -35,7 +35,7 @@
                     <a 
                       href="{% url 'cadastros:editar_curso' curso.pk %}" 
                       class="table-link" 
-                      data-bs-toggle="tooltip" 
+                      data-bs-toggle="tooltip"
                       data-bs-placement="top" 
                       title="Editar"
                     >
@@ -49,13 +49,17 @@
                       class="table-link" 
                       data-bs-toggle="tooltip" 
                       data-bs-placement="top" 
-                      data-toggle="modal" 
-                      data-target="#modal-delecao"
-                      onclick="abrirModalDelecao('{{ curso.pk }}')"
                       title="Deletar"
+                      data-toggle="modal"
+                      data-target="#modal-delecao" 
+                      onclick="abrirModalDelecao('{{ curso.pk }}')" 
                     >
                       <i class="bx bx-trash-alt"></i>
                     </a>
+                  </li>
+
+                  <li class="d-none" id="descricao-{{ curso.id }}">
+                    {{ curso.descricao }}
                   </li>
 
                   <li class="list-inline-item">
@@ -64,10 +68,10 @@
                       class="table-link" 
                       data-bs-toggle="tooltip" 
                       data-bs-placement="top" 
-                      data-toggle="modal" 
-                      data-target="#modal-informacoes"
-                      onclick="abrirModalInformacoes('{{ curso.nome }}', '{{ curso.descricao }}')"
                       title="Informações"
+                      data-toggle="modal"
+                      data-target="#modal-informacoes"
+                      onclick="abrirModalInformacoes('{{ curso.nome }}', '{{ curso.id }}')"
                     >
                       <i class="bx bx-info-circle"></i>
                     </a>
@@ -84,7 +88,8 @@
   </div>
 
   <!-- Modal de informações -->
-  <div class="modal fade" id="modal-informacoes" tabindex="-1" aria-labelledby="modal-informacoes-label" aria-hidden="true">
+  <div class="modal fade" id="modal-informacoes" tabindex="-1" aria-labelledby="modal-informacoes-label"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
