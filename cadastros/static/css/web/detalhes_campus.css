@@ -36,3 +36,8 @@ body {
 .link-site:hover {
   color: #32A041;
 }
+
+.titulo {
+  font-size: 1.65rem;
+  color: #32A041;
+}

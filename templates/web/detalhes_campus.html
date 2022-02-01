@@ -1,265 +1,265 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 
-<head>
-  {% load static %}
+  <head>
+    {% load static %}
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
 
-  <!-- Fonte Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet" />
+    <!-- Fonte Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet" />
 
-  <!-- CSS Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <!-- CSS Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 
-  <!-- CSS do Mapa -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin="" />
-  <link rel="stylesheet" href="{% static 'css/map.css' %}">
+    <!-- CSS do Mapa -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin="" />
+    <link rel="stylesheet" href="{% static 'css/map.css' %}">
 
-  <!-- CSS do projeto -->
-  <link rel="stylesheet" href="{% static 'css/web/detalhes_campus.css' %}">
+    <!-- CSS do projeto -->
+    <link rel="stylesheet" href="{% static 'css/web/detalhes_campus.css' %}">
 
-  <!-- Icones FontAwesome -->
-  <script src="https://kit.fontawesome.com/7b665cb419.js" crossorigin="anonymous"></script>
+    <!-- Icones FontAwesome -->
+    <script src="https://kit.fontawesome.com/7b665cb419.js" crossorigin="anonymous"></script>
 
-  <title>Sistema Educacional</title>
-</head>
+    <title>Sistema Educacional</title>
+  </head>
 
-<body class="p-4">
-  <header class="d-flex flex-column mb-4 gap-3">
-    <a href="{% url 'web:listar_campus' %}" class="link-site">
-      <i class="fas fa-chevron-left"></i>
-      <span>Voltar</span>
-    </a>
-
-    {% if campus.foto %}
-    <img src="{{ campus.foto.url }}" alt="Foto do {{ campus.nome }}" class="img-campus">
-    {% endif %}
-  </header>
-
-  <main class="d-flex flex-column gap-3">
-    <div class="d-block d-md-flex justify-content-between align-items-center">
-      <h2>{{ campus.instituicao.sigla }} {{ campus.nome }}</h2>
-
-      <a href="{{ campus.link }}" class="link-site" target="_blank">
-        <i class="fas fa-globe"></i>
-        Visitar site
+  <body class="p-4">
+    <header class="d-flex flex-column mb-4 gap-3">
+      <a href="{% url 'web:listar_campus' %}" class="link-site">
+        <i class="fas fa-chevron-left"></i>
+        <span>Voltar</span>
       </a>
-    </div>
 
-    <div class="d-block d-md-flex align-items-center gap-4">
-      <span>
-        <h6>Cursos</h6>
-        <span>{{ campus.cursos.count }}</span>
-      </span>
-
-      <span>
-        <h6>Programas</h6>
-        <span>{{ programas.count }}</span>
-      </span>
-
-      <span>
-        <h6>Projetos</h6>
-        <span>{{ projetos.count }}</span>
-      </span>
-
-      <span>
-        <h6>Ações Afirmativas</h6>
-        <span>{{ acoes_afirmativas.count }}</span>
-      </span>
-    </div>
-
-    <div>
-      <h4 class="mb-3">Endereço</h4>
-
-      <div class="mb-3">
-        <h6 class="mb-1">Logradouro</h6>
-        <span>{{ campus.endereco.logradouro }}</span>
-      </div>
-
-      <div class="mb-3">
-        <h6 class="mb-1">Número</h6>
-        <span>{{ campus.endereco.numero }}</span>
-      </div>
-
-      <div class="mb-3">
-        <h6 class="mb-1">Cidade</h6>
-        <span>{{ campus.endereco.cidade }}</span>
-      </div>
-
-      <div class="mb-3">
-        <h6 class="mb-1">Estado</h6>
-        <span>{{ campus.endereco.estado }}</span>
-      </div>
-    </div>
-
-    <div class="accordion accordion-flush">
-
-      {% if campus.cursos.count > 0 %}
-      <div class="accordion-item">
-        <h3 class="accordion-header" id="header-accordion-cursos">
-          <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
-            data-bs-target="#accordion-cursos" aria-expanded="true" aria-controls="accordion-cursos">
-            <h4 class="mb-0">Cursos</h4>
-          </button>
-        </h3>
-
-        <div id="accordion-cursos" class="accordion-collapse collapse show" aria-labelledby="header-accordion-cursos">
-          <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
-            {% for curso in campus.cursos.all %}
-            <div class="card card-body border-0 px-4 py-4 shadow-sm">
-              <h5 class="mb-3">{{ curso.curso.nome }}</h5>
-
-              <div>
-                {{ curso.curso.descricao|safe }}
-              </div>
-
-              <a href="{{ curso.link }}" target="_blank" class="link-site">
-                <i class="fas fa-globe"></i>
-                Acessar página do curso
-              </a>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
+      {% if campus.foto %}
+        <img src="{{ campus.foto.url }}" alt="Foto do {{ campus.nome }}" class="img-campus">
       {% endif %}
+    </header>
 
-      {% if programas.count > 0 %}
-      <div class="accordion-item">
-        <h3 class="accordion-header" id="header-accordion-programas">
-          <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
-            data-bs-target="#accordion-programas" aria-expanded="true" aria-controls="accordion-programas">
-            <h4 class="mb-0">Programas</h4>
-          </button>
-        </h3>
+    <main class="d-flex flex-column gap-3">
+      <div class="d-block d-md-flex justify-content-between align-items-center">
+        <h2>{{ campus.instituicao.sigla }} {{ campus.nome }}</h2>
 
-        <div id="accordion-programas" class="accordion-collapse collapse show"
-          aria-labelledby="header-accordion-programas">
-          <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
-            {% for programa in programas.all %}
-            <div class="card card-body border-0 px-4 py-4 shadow-sm">
-              <h5 class="mb-3">{{ programa.nome }}</h5>
+        <a href="{{ campus.link }}" class="link-site" target="_blank">
+          <i class="fas fa-globe"></i>
+          Visitar site
+        </a>
+      </div>
 
-              <div>
-                {{ programa.descricao|safe }}
+      <div class="d-block d-md-flex align-items-center gap-4">
+        <span>
+          <h6>Cursos</h6>
+          <span>{{ campus.cursos.count }}</span>
+        </span>
+
+        <span>
+          <h6>Programas</h6>
+          <span>{{ programas.count }}</span>
+        </span>
+
+        <span>
+          <h6>Projetos</h6>
+          <span>{{ projetos.count }}</span>
+        </span>
+
+        <span>
+          <h6>Ações Afirmativas</h6>
+          <span>{{ acoes_afirmativas.count }}</span>
+        </span>
+      </div>
+
+      <div>
+        <h4 class="mb-3">Endereço</h4>
+
+        <div class="mb-3">
+          <h6 class="mb-1">Logradouro</h6>
+          <span>{{ campus.endereco.logradouro }}</span>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="mb-1">Número</h6>
+          <span>{{ campus.endereco.numero }}</span>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="mb-1">Cidade</h6>
+          <span>{{ campus.endereco.cidade }}</span>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="mb-1">Estado</h6>
+          <span>{{ campus.endereco.estado }}</span>
+        </div>
+      </div>
+
+      <div class="accordion accordion-flush">
+
+        {% if campus.cursos.count > 0 %}
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="header-accordion-cursos">
+              <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#accordion-cursos" aria-expanded="true" aria-controls="accordion-cursos">
+                <h4 class="mb-0">Cursos</h4>
+              </button>
+            </h3>
+
+            <div id="accordion-cursos" class="accordion-collapse collapse show" aria-labelledby="header-accordion-cursos">
+              <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
+                {% for curso in campus.cursos.all %}
+                  <div class="card card-body border-0 px-4 py-4 shadow-sm">
+                    <h5 class="titulo mb-3">{{ curso.curso.nome }}</h5>
+
+                    <div>
+                      {{ curso.curso.descricao|safe }}
+                    </div>
+
+                    <a href="{{ curso.link }}" target="_blank" class="link-site">
+                      <i class="fas fa-globe"></i>
+                      Acessar página do curso
+                    </a>
+                  </div>
+                {% endfor %}
               </div>
-
-              <a href="{{ programa.link }}" target="_blank" class="link-site">
-                <i class="fas fa-globe"></i>
-                Acessar página do programa
-              </a>
             </div>
-            {% endfor %}
           </div>
-        </div>
-      </div>
-      {% endif %}
+        {% endif %}
 
-      {% if projetos.count > 0 %}
-      <div class="accordion-item">
-        <h3 class="accordion-header" id="header-accordion-projetos">
-          <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
-            data-bs-target="#accordion-projetos" aria-expanded="true" aria-controls="accordion-projetos">
-            <h4 class="mb-0">Projetos</h4>
-          </button>
-        </h3>
+        {% if programas.count > 0 %}
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="header-accordion-programas">
+              <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#accordion-programas" aria-expanded="true" aria-controls="accordion-programas">
+                <h4 class="mb-0">Programas</h4>
+              </button>
+            </h3>
 
-        <div id="accordion-projetos" class="accordion-collapse collapse show"
-          aria-labelledby="header-accordion-projetos">
-          <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
-            {% for projeto in projetos.all %}
-            <div class="card card-body border-0 px-4 py-4 shadow-sm">
-              <h5 class="mb-3">{{ projeto.nome }}</h5>
+            <div id="accordion-programas" class="accordion-collapse collapse show"
+              aria-labelledby="header-accordion-programas">
+              <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
+                {% for programa in programas.all %}
+                  <div class="card card-body border-0 px-4 py-4 shadow-sm">
+                    <h5 class="titulo mb-3">{{ programa.nome }}</h5>
 
-              <div>
-                {{ projeto.descricao|safe }}
+                    <div>
+                      {{ programa.descricao|safe }}
+                    </div>
+
+                    <a href="{{ programa.link }}" target="_blank" class="link-site">
+                      <i class="fas fa-globe"></i>
+                      Acessar página do programa
+                    </a>
+                  </div>
+                {% endfor %}
               </div>
-
-              <a href="{{ projeto.link }}" target="_blank" class="link-site">
-                <i class="fas fa-globe"></i>
-                Acessar página do projeto
-              </a>
             </div>
-            {% endfor %}
           </div>
-        </div>
-      </div>
-      {% endif %}
+        {% endif %}
 
-      {% if acoes_afirmativas.count > 0 %}
-      <div class="accordion-item">
-        <h3 class="accordion-header" id="header-accordion-acoes">
-          <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
-            data-bs-target="#accordion-acoes" aria-expanded="true" aria-controls="accordion-acoes">
-            <h4 class="mb-0">Ações Afirmativas</h4>
-          </button>
-        </h3>
+        {% if projetos.count > 0 %}
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="header-accordion-projetos">
+              <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#accordion-projetos" aria-expanded="true" aria-controls="accordion-projetos">
+                <h4 class="mb-0">Projetos</h4>
+              </button>
+            </h3>
 
-        <div id="accordion-acoes" class="accordion-collapse collapse show" aria-labelledby="header-accordion-acoes">
-          <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
-            {% for acao in acoes_afirmativas.all %}
-            <div class="card card-body border-0 px-4 py-4 shadow-sm">
-              <h5 class="mb-3">{{ acao.nome }}</h5>
+            <div id="accordion-projetos" class="accordion-collapse collapse show"
+              aria-labelledby="header-accordion-projetos">
+              <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
+                {% for projeto in projetos.all %}
+                  <div class="card card-body border-0 px-4 py-4 shadow-sm">
+                    <h5 class="titulo mb-3">{{ projeto.nome }}</h5>
 
-              <div>
-                {{ acao.descricao|safe }}
+                    <div>
+                      {{ projeto.descricao|safe }}
+                    </div>
+
+                    <a href="{{ projeto.link }}" target="_blank" class="link-site">
+                      <i class="fas fa-globe"></i>
+                      Acessar página do projeto
+                    </a>
+                  </div>
+                {% endfor %}
               </div>
-
-              <a href="{{ acao.link }}" target="_blank" class="link-site">
-                <i class="fas fa-globe"></i>
-                Acessar página da ação afirmativa
-              </a>
             </div>
-            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if acoes_afirmativas.count > 0 %}
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="header-accordion-acoes">
+              <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#accordion-acoes" aria-expanded="true" aria-controls="accordion-acoes">
+                <h4 class="mb-0">Ações Afirmativas</h4>
+              </button>
+            </h3>
+
+            <div id="accordion-acoes" class="accordion-collapse collapse show" aria-labelledby="header-accordion-acoes">
+              <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
+                {% for acao in acoes_afirmativas.all %}
+                  <div class="card card-body border-0 px-4 py-4 shadow-sm">
+                    <h5 class="titulo mb-3">{{ acao.nome }}</h5>
+
+                    <div>
+                      {{ acao.descricao|safe }}
+                    </div>
+
+                    <a href="{{ acao.link }}" target="_blank" class="link-site">
+                      <i class="fas fa-globe"></i>
+                      Acessar página da ação afirmativa
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="accordion-item">
+          <h3 class="accordion-header" id="header-accordion-mapa">
+            <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
+              data-bs-target="#accordion-mapa" aria-expanded="true" aria-controls="accordion-mapa">
+              <h4 class="mb-0">Mapa</h4>
+            </button>
+          </h3>
+
+          <div id="accordion-mapa" class="accordion-collapse collapse show" aria-labelledby="header-accordion-mapa">
+            <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
+              <div class="card card-body p-0">
+                <div id="map"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      {% endif %}
+    </main>
 
-      <div class="accordion-item">
-        <h3 class="accordion-header" id="header-accordion-mapa">
-          <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
-            data-bs-target="#accordion-mapa" aria-expanded="true" aria-controls="accordion-mapa">
-            <h4 class="mb-0">Mapa</h4>
-          </button>
-        </h3>
+    {{ coordenadas|json_script:"coordenadas" }}
 
-        <div id="accordion-mapa" class="accordion-collapse collapse show" aria-labelledby="header-accordion-mapa">
-          <div class="accordion-body d-flex flex-column bg-light gap-3 px-0 py-4">
-            <div class="card card-body p-0">
-              <div id="map"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+    <!-- JS Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"></script>
 
-  {{ coordenadas|json_script:"coordenadas" }}
+    <!-- JS do Mapa -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""></script>
 
-  <!-- JS Bootstrap 5 -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
-
-  <!-- JS do Mapa -->
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
-
-  <!-- JS do projeto -->
-  <script src="{% static 'javascript/web/detalhes_campus.js' %}"></script>
-</body>
+    <!-- JS do projeto -->
+    <script src="{% static 'javascript/web/detalhes_campus.js' %}"></script>
+  </body>
 
 </html>
