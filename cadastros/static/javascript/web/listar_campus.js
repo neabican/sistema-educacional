@@ -109,6 +109,15 @@ function carregarMaisResultados() {
   buscarCampus();
 }
 
+function limparTodosResultados() {
+  pesquisa = null;
+  btnLimparPesquisa.classList.add('d-none');
+  inputPesquisa.value = '';
+
+  campus = [];
+  buscarCampus();
+}
+
 // Event listeners
 formPesquisa.addEventListener('submit', event => {
   event.preventDefault();
@@ -116,13 +125,11 @@ formPesquisa.addEventListener('submit', event => {
   pesquisarCampus();
 });
 
-btnLimparPesquisa.addEventListener('click', () => {
-  pesquisa = null;
-  btnLimparPesquisa.classList.add('d-none');
-  inputPesquisa.value = '';
+btnLimparPesquisa.addEventListener('click', limparTodosResultados);
 
-  campus = [];
-  buscarCampus();
+inputPesquisa.addEventListener('keyup', () => {
+ if (inputPesquisa.value.trim() === '')
+  limparTodosResultados();
 });
 
 window.addEventListener('load', buscarCampus);
