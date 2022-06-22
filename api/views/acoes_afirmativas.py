@@ -9,8 +9,6 @@ from ..serializers import AcaoAfirmativaSerializer
 from cadastros.models import *
 
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 def listar_acoes_afirmativas(request, pk_campus):
   if request.method == 'GET':
     acoes_afirmativas = AcaoAfirmativa.objects.filter(campus__pk=pk_campus)
@@ -19,8 +17,6 @@ def listar_acoes_afirmativas(request, pk_campus):
     return Response(serializador.data)
 
 @api_view(['GET'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 def detalhes_acao_afirmativa(request, pk, pk_campus):
   if request.method == 'GET':
     try:
