@@ -11,21 +11,21 @@ from cadastros.models import *
 @api_view(['GET'])
 def listar_campus(request):
   if request.method == 'GET':
-    pag_atual = int(request.GET.get('pag')) * 10
-
     if 'campus' in request.GET:
       pesquisa = request.GET.get('campus')
-
       campus = Campus.objects.filter(
         Q(nome__icontains=pesquisa) |
         Q(instituicao__sigla__icontains=pesquisa) |
         Q(cursos__curso__nome__icontains=pesquisa)
-      )[pag_atual:pag_atual + 10]
+      )
     else:
-      campus = Campus.objects.all()[pag_atual:pag_atual + 10]
+      campus = Campus.objects.all()
+
+    if request.GET.get('pag') != None:
+      pag_atual = int(request.GET.get('pag')) * 10
+      campus = campus[pag_atual:pag_atual+10]
 
     serializador = CampusSerializer(campus, many=True)
-
     return Response(serializador.data)
 
 @api_view(['GET'])
