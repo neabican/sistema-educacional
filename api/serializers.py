@@ -9,7 +9,7 @@ class InstituicaoSerializer(serializers.ModelSerializer):
 class CursoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Curso
-    fields = ['nome', 'descricao']
+    fields = ['pk','nome', 'descricao']
 
 class CursoCampusSerializer(serializers.ModelSerializer):
   curso = CursoSerializer()
@@ -22,7 +22,7 @@ class EnderecoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Endereco
     fields = [
-      'cidade', 'estado', 'logradouro',
+      'pk', 'cidade', 'estado', 'logradouro',
       'numero', 'cep', 'latitude', 'longitude',
     ]
 
