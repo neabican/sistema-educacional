@@ -1,3 +1,4 @@
+from .instituicoes import *
 from .campus import *
 from .programas import *
 from .projetos import *
