@@ -69,20 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sistema_educacional.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
-        'TEST': {
-          'NAME': DB_TEST,
-        }
-    }
-}
-
 REST_FRAMEWORK = {
   'DEFAULT_AUTHENTICATION_CLASSES': [
     'rest_framework.authentication.TokenAuthentication',

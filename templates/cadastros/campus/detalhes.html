@@ -137,7 +137,6 @@
                                   <i class="bx bx-edit"></i>
                                 </a>
                               </li>
-            
                               <li class="list-inline-item">
                                 <a 
                                   href="#" 
@@ -151,6 +150,24 @@
                                   title="Deletar"
                                 >
                                   <i class="bx bx-trash-alt"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a
+                                  href="#"
+                                  class="table-link"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-placement="top"
+                                  data-toggle="modal"
+                                  data-target="#modal-informacoes"
+                                  onclick="abrirModalInformacoes(
+                                    '{{ curso_campus.curso.nome }}',
+                                    '{{ curso_campus.descricao }}',
+                                    '{{ curso_campus.link }}'
+                                  )"
+                                  title="Informações"
+                                >
+                                  <i class="bx bx-info-circle"></i>
                                 </a>
                               </li>
                             </ul>

@@ -77,7 +77,7 @@ class FormEndereco(ModelForm):
 class FormCursoCampus(ModelForm):
   class Meta:
     model = CursoCampus
-    fields = ['curso', 'link',]
+    fields = ['curso', 'descricao', 'link']
 
   def __init__(self, *args, **kwargs):
     super(FormCursoCampus, self).__init__(*args, **kwargs)
@@ -86,8 +86,9 @@ class FormCursoCampus(ModelForm):
     self.helper.attrs = {'novalidate': ''}
     self.helper.layout = Layout(
       Row(
-        Column('curso', css_class='col-xl-6'),
-        Column('link', css_class='col-xl-6'),
+        Column('curso', css_class='col-xl-12'),
+        Column('descricao', css_class='col-xl-12 textarea-descricao'),
+        Column('link', css_class='col-xl-12'),
       )
     )
 
