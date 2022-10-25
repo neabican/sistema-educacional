@@ -13,6 +13,11 @@ class Instituicao(models.Model):
   def __str__(self):
     return self.nome
 
+class Cota(models.Model):
+  instituicao = models.ForeignKey(Instituicao, on_delete=models.CASCADE)
+  nome = models.CharField(max_length=250)
+  porcentagem = models.IntegerField()
+
 class Curso(models.Model):
   nome = models.CharField(max_length=250, unique=True)
   descricao = RichTextField('Descrição')

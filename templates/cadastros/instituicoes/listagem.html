@@ -21,6 +21,7 @@
           <th scope="col">Nome</th>
           <th scope="col">Sigla</th>
           <th scope="col">Nº de Câmpus</th>
+          <th scope="col">Cotas</th>
           <th scope="col">Ações</th>
         </tr>
       </thead>
@@ -30,7 +31,8 @@
           <td>{{ instituicao.id }}</td>
           <td>{{ instituicao.nome }}</td>
           <td>{{ instituicao.sigla }}</td>
-          <td>{{ instituicao.numero_campus }}</td>
+          <td>{{ instituicao.campus.count }}</td>
+          <td>{{ instituicao.cotas.count }}</td>
           <td>
             <ul class="list-inline mb-0">
               <li class="list-inline-item">
@@ -46,6 +48,18 @@
                 <a href="#" class="table-link" data-bs-toggle="tooltip" data-bs-placement="top" data-toggle="modal"
                   data-target="#modal-delecao" onclick="abrirModalDelecao('{{ instituicao.pk }}')" title="Deletar">
                   <i class="bx bx-trash-alt"></i>
+                </a>
+              </li>
+
+              <li class="list-inline-item">
+                <a 
+                  href="{% url 'cadastros:detalhes_instituicao' instituicao.pk %}" 
+                  class="table-link" 
+                  data-bs-toggle="tooltip" 
+                  data-bs-placement="top" 
+                  title="Informações"
+                >
+                  <i class="bx bx-info-circle"></i>
                 </a>
               </li>
             </ul>
@@ -78,6 +92,12 @@
 
           <label for="sigla" class="mb-1">Sigla</label>
           <input type="text" name="sigla" id="sigla" class="form-control">
+
+          <label for="sigla" class="mb-1">Cotas</label>
+          <button type="submit" form="form-cadastro" class="btn btn-sm btn-primary">
+            Nova cota
+          </button>
+
         </form>
       </div>
       <div class="modal-footer">

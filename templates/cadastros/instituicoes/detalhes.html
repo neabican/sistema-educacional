@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="{% static 'assets/vendor/datatables/dataTables.bootstrap4.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/map.css' %}">
+  <link rel="stylesheet" href="{% static 'css/global.css' %}">
+{% endblock %}
+
+{% block content %}
+  {% include 'utilitarios/mensagens.html' %}
+
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <h5 class="text-primary mb-0">Dados Gerais</h5>
+            </div>
+            <div class="card-body">
+              <h6 class="mb-0">Instituição</h6>
+              <p class="text-dark mb-0">{{ instituicao.nome }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>        
+        <div class="col-xl-6">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <div class="d-flex align-items-center justify-content-between">
+                <h5 class="text-primary mb-0">Cotas</h5>
+                <a 
+                  href="{% url 'cadastros:cadastrar_cota' instituicao.pk %}"
+                  class="btn btn-sm btn-primary"
+                >
+                  Nova cota
+                </a>
+              </div>
+            </div>
+            <div class="card-body">
+              {% if instituicao.cotas %}
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hoverable" id="tabela-programa">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Porcentagem</th>
+                        <th scope="col">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tbody>
+                      {% for cota in instituicao.cotas.all %}
+                        <tr>
+                          <td>{{ cota.nome }}</td>
+                          <td>{{ cota.porcentagem }}%</td>
+                          <td>
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <a 
+                                  href="{% url 'cadastros:editar_cota' instituicao.pk cota.pk %}" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  title="Editar"
+                                >
+                                  <i class="bx bx-edit"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  id="{% url 'cadastros:deletar_cota' instituicao.pk cota.pk  %}"
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-delecao"
+                                  onclick="abrirModalDelecao(event, 'cota')"
+                                  title="Deletar"
+                                >
+                                  <i class="bx bx-trash-alt"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-informacoes"
+                                  onclick="abrirModalInformacoes(
+                                    '{{ cota.nome }}',
+                                    '{{ cota.porcentagem }}'
+                                  )"
+                                  title="Informações"
+                                >
+                                  <i class="bx bx-info-circle"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              {% else %}
+                <h6 class="text-center">Nenhuma cota cadastrado.</h6>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de informações -->
+  <div class="modal fade" id="modal-informacoes" tabindex="-1" aria-labelledby="modal-informacoes-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-informacoes-label">Informações</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h6 class="mb-0">Nome</h6>
+          <p class="text-dark" id="info-nome"></p>
+
+          <h6 class="mb-0">Porcentagem</h6>
+          <div class="text-dark" id="info-descricao"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de deleção -->
+  <div class="modal fade" id="modal-delecao" tabindex="-1" aria-labelledby="modal-delecao-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-delecao-label"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="text-center mb-0">Você tem certeza que deseja deletar este registro?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">
+            Cancelar
+          </button>
+          <a href="#" id="button-submit" class="btn btn-sm btn-primary">
+            Deletar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  {% if instituicao.cotas.count > 0 %}
+    {% include 'utilitarios/config_data_table.html' with tipo="cota" %}
+  {% endif %}
+
+  {{ coordenadas|json_script:"coordenadas" }}
+
+  <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+
+  <script src="{% static 'javascript/campus/campus.js' %}"></script>
+{% endblock %}

@@ -1,8 +1,9 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
-from ..models import Instituicao, Campus
+from ..forms import FormCota
+from ..models import Cota, Instituicao, Campus
 from .utilitarios import gerar_paginacao
 
 @login_required
@@ -58,9 +59,20 @@ def instituicoes(request):
         status_code = 404
 
   instituicoes = Instituicao.objects.all().order_by('id')
+  for x, inst in enumerate(instituicoes):
+    instituicoes[x].cotas = Cota.objects.filter(instituicao=inst)
+    instituicoes[x].campus = Campus.objects.filter(instituicao=inst)
+  
   # Paginando resultados
   instituicoes, paginas = gerar_paginacao(request, instituicoes, 10)
 
   return render(request, 'cadastros/instituicoes/listagem.html', { 
     'instituicoes': instituicoes, 'paginas': paginas
   }, status=status_code)
+
+@login_required
+def detalhes_instituicao(request, pk):
+    instituicao = get_object_or_404(Instituicao, pk=pk)
+    instituicao.cotas = Cota.objects.filter(instituicao=instituicao)
+
+    return render(request, 'cadastros/instituicoes/detalhes.html', {'instituicao': instituicao})

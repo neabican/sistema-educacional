@@ -8,6 +8,12 @@ urlpatterns = [
 
   # Instituições
   path('instituicoes', views.instituicoes, name='instituicoes'),
+  path('instituicoes/detalhes/<int:pk>', views.detalhes_instituicao, name='detalhes_instituicao'),
+ 
+  path('instituicoes/detalhes/<int:pk_instituicao>/cadastrar_cota', views.cadastrar_cota, name='cadastrar_cota'),
+  path('instituicoes/detalhes/<int:pk_instituicao>/editar_cota/<int:pk_cota>', views.editar_cota, name='editar_cota'),
+  path('instituicoes/detalhes/<int:pk_instituicao>/deletar_cota/<int:pk_cota>', views.deletar_cota, name='deletar_cota'),
+
 
   # Cursos
   path('cursos', views.cursos, name='cursos'),
