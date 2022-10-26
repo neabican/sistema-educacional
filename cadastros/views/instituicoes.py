@@ -64,10 +64,11 @@ def instituicoes(request):
     instituicoes[x].campus = Campus.objects.filter(instituicao=inst)
   
   # Paginando resultados
-  instituicoes, paginas = gerar_paginacao(request, instituicoes, 10)
+  # instituicoes, paginas = gerar_paginacao(request, instituicoes, 10)
 
   return render(request, 'cadastros/instituicoes/listagem.html', { 
-    'instituicoes': instituicoes, 'paginas': paginas
+    'instituicoes': instituicoes
+    # , 'paginas': paginas
   }, status=status_code)
 
 @login_required

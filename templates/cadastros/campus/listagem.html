@@ -21,6 +21,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Instituição</th>
             <th scope="col">Endereço</th>
+            <th scope="col">Descrição</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
@@ -31,6 +32,7 @@
               <td>{{ campus.nome }}</td>
               <td>{{ campus.instituicao.nome }}</td>
               <td>{{ campus.endereco }}</td>
+              <td>{{ campus.descricao|safe|truncatechars:150  }}</td>
               <td>
                 <ul class="list-inline mb-0">
                   <li class="list-inline-item">

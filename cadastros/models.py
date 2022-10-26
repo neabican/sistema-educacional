@@ -21,6 +21,7 @@ class Cota(models.Model):
 class Curso(models.Model):
   nome = models.CharField(max_length=250, unique=True)
   descricao = RichTextField('Descrição')
+  vagas= models.IntegerField(default = 0)
 
   def __str__(self):
     return self.nome
@@ -109,6 +110,7 @@ class Campus(models.Model):
   endereco = models.ForeignKey('Endereco', on_delete=models.PROTECT)
   instituicao = models.ForeignKey('Instituicao', on_delete=models.PROTECT)
   cursos = models.ManyToManyField('CursoCampus')
+  descricao = RichTextField('Descrição', default = '')
 
   def __str__(self):
     return self.nome

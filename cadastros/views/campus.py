@@ -28,10 +28,11 @@ def campus(request):
 
     campus = Campus.objects.all().order_by('id')
     # Paginando resultados
-    campus, paginas = gerar_paginacao(request, campus, 10)
+    # campus, paginas = gerar_paginacao(request, campus, 10)
 
     return render(request, 'cadastros/campus/listagem.html', {
-        'lista_campus': campus, 'paginas': paginas
+        'lista_campus': campus
+        # , 'paginas': paginas
     }, status=status_code)
 
 

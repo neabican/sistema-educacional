@@ -28,10 +28,11 @@ def cursos(request):
 
   cursos = Curso.objects.all().order_by('id')
   # Paginando resultados
-  cursos, paginas = gerar_paginacao(request, cursos, 10)
+  # cursos, paginas = gerar_paginacao(request, cursos, 10)
 
   return render(request, 'cadastros/cursos/listagem.html', {
-    'cursos': cursos, 'paginas': paginas
+    'cursos': cursos
+    # , 'paginas': paginas
   }, status=status_code)
 
 @login_required

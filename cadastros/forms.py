@@ -28,7 +28,7 @@ class FormCota(ModelForm):
 class FormCurso(ModelForm):
   class Meta:
     model = Curso
-    fields = ['nome', 'descricao']
+    fields = ['nome', 'vagas',  'descricao']
 
   def __init__(self, *args, **kwargs):
     super(FormCurso, self).__init__(*args, **kwargs)
@@ -40,6 +40,9 @@ class FormCurso(ModelForm):
         Column('nome', css_class='col-xl-12')
       ),
       Row(
+        Column('vagas', css_class='col-xl-12')
+      ),
+      Row(
         Column('descricao', css_class='col-xl-12 textarea-descricao')
       )
     )
@@ -47,7 +50,7 @@ class FormCurso(ModelForm):
 class FormCampus(ModelForm):
   class Meta:
     model = Campus
-    fields = ['nome', 'instituicao', 'foto', 'link',]
+    fields = ['nome', 'instituicao', 'foto', 'link', 'descricao']
 
   def __init__(self, *args, **kwargs):
     super(FormCampus, self).__init__(*args, **kwargs)
@@ -62,6 +65,9 @@ class FormCampus(ModelForm):
       Row(
         Column('foto', css_class='col-xl-3'),
         Column('link', css_class='col-xl-9'),
+      ),
+      Row(
+        Column('descricao', css_class='col-xl-12 textarea-descricao')
       )
     )
 

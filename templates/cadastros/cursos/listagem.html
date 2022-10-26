@@ -20,6 +20,7 @@
             <th scope="col">ID</th>
             <th scope="col">Nome</th>
             <th scope="col">Descrição</th>
+            <th scope="col">Vagas</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
@@ -29,6 +30,7 @@
               <td>{{ curso.id }}</td>
               <td>{{ curso.nome }}</td>
               <td>{{ curso.descricao|safe|truncatechars:150 }}</td>
+              <td>{{ curso.vagas }}</td>
               <td>
                 <ul class="list-inline mb-0">
                   <li class="list-inline-item">
@@ -101,6 +103,9 @@
         <div class="modal-body">
           <h6 class="mb-0">Nome</h6>
           <p class="text-dark" id="nome-curso"></p>
+
+          <h6 class="mb-0">Vagas</h6>
+          <div class="text-dark" id="descricao-curso"></div>
 
           <h6 class="mb-0">Descrição</h6>
           <div class="text-dark" id="descricao-curso"></div>
