@@ -21,7 +21,6 @@ class Cota(models.Model):
 class Curso(models.Model):
   nome = models.CharField(max_length=250, unique=True)
   descricao = RichTextField('Descrição')
-  vagas= models.IntegerField(default = 0)
 
   def __str__(self):
     return self.nome
@@ -29,6 +28,7 @@ class Curso(models.Model):
 class CursoCampus(models.Model):
   curso = models.ForeignKey('Curso', on_delete=models.CASCADE)
   link = models.CharField(max_length=500)
+  vagas= models.IntegerField(default = 0)
   descricao = RichTextField('Informações complementares')
 
   def __str__(self):
