@@ -101,7 +101,7 @@
         </div>
         <div class="col-xl-3">
           <div class="card card-body border-left-danger py-3 mb-3">
-            <h5 class="mb-0">Ações Afirmativas</h5>
+            <h5 class="mb-0">Assistência Est.</h5>
             <h5 class="text-dark mb-0">{{ campus.acoes_afirmativas.count }}</h5>
           </div>
         </div>
@@ -389,12 +389,12 @@
           <div class="card shadow mb-3">
             <div class="card-header">
               <div class="d-flex align-items-center justify-content-between">
-                <h5 class="text-primary mb-0">Ações Afirmativas</h5>
+                <h5 class="text-primary mb-0">Assistências Estudantil</h5>
                 <a 
                   href="{% url 'cadastros:cadastrar_acao_afirmativa' campus.pk %}"
                   class="btn btn-sm btn-primary"
                 >
-                  Nova Ação Afirmativa
+                  Nova Assis. Estud.
                 </a>
               </div>
             </div>
@@ -472,7 +472,7 @@
                   </table>
                 </div>
               {% else %}
-                <h6 class="text-center">Nenhuma ação afirmativa cadastrada.</h6>
+                <h6 class="text-center">Nenhuma assistências estudantis cadastrada.</h6>
               {% endif %}
             </div>
           </div>

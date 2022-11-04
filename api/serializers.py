@@ -21,7 +21,7 @@ class CursoCampusSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = CursoCampus
-    fields = ['pk', 'link', 'descricao', 'curso']
+    fields = ['pk', 'link', 'vagas', 'descricao', 'curso']
 
 class EnderecoSerializer(serializers.ModelSerializer):
   class Meta:
@@ -100,6 +100,6 @@ class CampusSerializerSemInstituicao(serializers.ModelSerializer):
     model = Campus
     fields = [
       'pk', 'nome', 'foto', 'link', 'instituicao',
-      'endereco', 'cursos', 'programas',
+      'endereco', 'descricao', 'cursos', 'programas',
       'projetos', 'acoes_afirmativas',
     ]
