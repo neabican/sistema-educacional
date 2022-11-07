@@ -3,8 +3,9 @@ myvenv/
 venv/
 /static
 media/
-
-
+backups/
+token.json
+OAuth_token.json
 __pycache__
 *.pyc
 *~
