@@ -1,5 +1,5 @@
+from pathlib import Path
 import local_settings
-import settings
 import os
 import datetime
 from time import sleep
@@ -24,7 +24,8 @@ def criar_backup():
     DB_NAME = local_settings.DB_NAME
 
     # Realizando o Backup do banco de dados
-    dir = os.path.join(settings.BASE_DIR, 'backups')
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    dir = os.path.join(BASE_DIR, 'backups')
     if not os.path.exists(dir):
         os.makedirs(dir)
     now = datetime.datetime.now().strftime('%Y-%m-%d')
