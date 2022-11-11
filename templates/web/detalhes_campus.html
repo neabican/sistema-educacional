@@ -123,7 +123,102 @@
                     <div class="descricao">
                       {{ curso.curso.descricao|safe }}
                     </div>
+                    <br>
+                    {% if curso.vagas %}
+                        <h4 class="titulo mb-3">Vagas</h4>
 
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col">Categoria</th>
+                              <th scope="col">Vagas</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Total</td>
+                              <td>{{ curso.vagas }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Ampla Concorrencia</td>
+                              <td>{{ curso.vg_ampla_concorrencia }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Escola Pública</td>
+                              <td>{{ curso.vg_escola_publica }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col">Renda maior que 1.5 Salário Mínimo</th>
+                              <th scope="col">Vagas</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Preto | Pardo | Indígena</td>
+                              <td>{{ curso.RSPPI }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Não Preto | Pardo | Indígena</td>
+                              <td>{{ curso.RSNPPI }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Preto | Pardo | Indígena com deficiência</td>
+                              <td>{{ curso.RSPPIPCD }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Não Preto | Pardo | Indígena com deficiência</td>
+                              <td>{{ curso.RSNPPIPCD }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col">Renda menor que 1.5 Salário Mínimo</th>
+                              <th scope="col">Vagas</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Preto | Pardo | Indígena</td>
+                              <td>{{ curso.RIPPI }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Não Preto | Pardo | Indígena</td>
+                              <td>{{ curso.RINPPI }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Preto | Pardo | Indígena com deficiência</td>
+                              <td>{{ curso.RIPPIPCD }}</td>
+                            </tr>
+                            <tr>
+                              <th scope="row"></th>
+                              <td>Não Preto | Pardo | Indígena com deficiência</td>
+                              <td>{{ curso.RINPPIPCD }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    {% endif %}
+                    <br>
                     <a href="{{ curso.link }}" target="_blank" class="link-site">
                       <i class="fas fa-globe"></i>
                       Acessar página do curso
@@ -202,7 +297,7 @@
             <h3 class="accordion-header" id="header-accordion-acoes">
               <button class="accordion-button bg-light text-dark px-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#accordion-acoes" aria-expanded="true" aria-controls="accordion-acoes">
-                <h4 class="mb-0">Ações Afirmativas</h4>
+                <h4 class="mb-0">Assistência Estudantil</h4>
               </button>
             </h3>
 
@@ -218,7 +313,7 @@
 
                     <a href="{{ acao.link }}" target="_blank" class="link-site">
                       <i class="fas fa-globe"></i>
-                      Acessar página da ação afirmativa
+                      Acessar página da assistência Estudantil
                     </a>
                   </div>
                 {% endfor %}
