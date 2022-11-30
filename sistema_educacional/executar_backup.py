@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
-import settings
+import local_settings
 import os
 import datetime
 import time
@@ -11,13 +11,14 @@ from pydrive.drive import GoogleDrive
 
 def criar_backup():
     # Informações do local Settings
-    DB_HOST = settings.DB_HOST
-    DB_USER = settings.DB_USER
-    DB_PASSWORD = settings.DB_PASSWORD
-    DB_NAME = settings.DB_NAME
+    DB_HOST = local_settings.DB_HOST
+    DB_USER = local_settings.DB_USER
+    DB_PASSWORD = local_settings.DB_PASSWORD
+    DB_NAME = local_settings.DB_NAME
 
     # Realizando o Backup do banco de dados
-    dir = os.path.join(settings.BASE_DIR, 'backups')
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    dir = os.path.join(BASE_DIR, 'backups')
     if not os.path.exists(dir):
         os.makedirs(dir)
     now = datetime.datetime.now().strftime('%Y-%m-%d')
