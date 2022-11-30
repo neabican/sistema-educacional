@@ -28,19 +28,19 @@ def criar_backup():
     # Drive autenticacao
     gauth = GoogleAuth()
     try:
-        gauth.LoadCredentialsFile('mycreds.txt')
+        gauth.LoadCredentialsFile('token.json')
     except Exception:
         print("ERRO: Nao foi possivel carregar as credenciais")
 
     drive = GoogleDrive(gauth)
     # Upload arquivo
-    file = drive.CreateFile({'parents': [{'id': '1Fd1xTGtZAN4PwUgzLxjYeJmrKJmjc2nd'}]})
-    file.SetContentFile(arquivo)
-    file['title'] = nome
+    file = drive.CreateFile({'parents': [{'id': '1flkyDl_B2NnH_zY8fFTOmOREzXtzKQas'}]})
+    file.SetContentFile(file_path)
+    file['title'] = name
     file.Upload()
     # Remove arquivo local
     time.sleep(5)
-    os.remove(arquivo)
+    # os.remove(file_path)
 
 
 
