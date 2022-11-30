@@ -38,7 +38,7 @@ def criar_backup():
     # Upload arquivo
     file = drive.CreateFile({'parents': [{'id': '1flkyDl_B2NnH_zY8fFTOmOREzXtzKQas'}]})
     file.SetContentFile(file_path)
-    file['title'] = name
+    # file['title'] = name
     file.Upload()
     # Remove arquivo local
     time.sleep(5)
