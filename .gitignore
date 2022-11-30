@@ -5,11 +5,11 @@ venv/
 media/
 backups/
 token.json
-client_secret.json
+client_secrets.json
 OAuth_token.json
 __pycache__
 *.pyc
 *~
 *.log
-settings.yml
+settings.yaml
 criar_usuarios.py

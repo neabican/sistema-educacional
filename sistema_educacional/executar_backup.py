@@ -27,7 +27,7 @@ def criar_backup():
     os.system(f'mysqldump -h {DB_HOST} -u {DB_USER} -p\'{DB_PASSWORD}\' \'{DB_NAME}\' --set-gtid-purged=OFF --no-tablespaces --column-statistics=0 | gzip -9 -c > {file_path}')
     # Drive autenticacao
     gauth = GoogleAuth()
-    # gauth.LocalWebserverAuth()
+    gauth.LocalWebserverAuth()
     try:
         gauth.LoadCredentialsFile('client_secrets.json')
     except Exception:
