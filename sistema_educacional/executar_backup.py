@@ -28,7 +28,7 @@ def criar_backup():
     # Drive autenticacao
     gauth = GoogleAuth()
     try:
-        gauth.LoadCredentialsFile('token.json')
+        gauth.LoadCredentialsFile('client_secrets.json')
     except Exception:
         print("ERRO: Nao foi possivel carregar as credenciais")
 
