@@ -25,12 +25,12 @@ def criar_backup():
     name = '{}-backup.sql.gz'.format(now)
     file_path = os.path.join(dir, name)
     os.system(f'mysqldump -h {DB_HOST} -u {DB_USER} -p\'{DB_PASSWORD}\' \'{DB_NAME}\' --set-gtid-purged=OFF --no-tablespaces --column-statistics=0 | gzip -9 -c > {file_path}')
-    # Drive autenticacao
-    gauth = GoogleAuth()
-    # gauth.LocalWebserverAuth()
     try:
+        # Drive autenticacao
+        gauth = GoogleAuth(settings_file='settings.yaml', http_timeout=None)
+        # gauth.LocalWebserverAuth()
         # gauth.LoadCredentialsFile('client_secrets.json')
-        gauth.LoadCredentialsFile('settings.yaml')
+        # gauth.LoadCredentialsFile('settings.yaml')
     except Exception:
         print("ERRO: Nao foi possivel carregar as credenciais")
 
