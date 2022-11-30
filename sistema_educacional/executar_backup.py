@@ -44,7 +44,7 @@ def criar_backup():
     file.Upload()
     # Remove arquivo local
     time.sleep(5)
-    # os.remove(file_path)
+    os.remove(file_path)
 
 
 
