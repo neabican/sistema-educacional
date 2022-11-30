@@ -25,20 +25,22 @@ def criar_backup():
     name = '{}-backup.sql.gz'.format(now)
     file_path = os.path.join(dir, name)
     os.system(f'mysqldump -h {DB_HOST} -u {DB_USER} -p\'{DB_PASSWORD}\' \'{DB_NAME}\' --set-gtid-purged=OFF --no-tablespaces --column-statistics=0 | gzip -9 -c > {file_path}')
-    try:
-        # Drive autenticacao
-        gauth = GoogleAuth(settings_file='settings.yaml', http_timeout=None)
-        # gauth.LocalWebserverAuth()
-        # gauth.LoadCredentialsFile('client_secrets.json')
-        # gauth.LoadCredentialsFile('settings.yaml')
-    except Exception:
-        print("ERRO: Nao foi possivel carregar as credenciais")
 
+    ## pydrive
+    gauth = GoogleAuth()
+    gauth.LoadCredentialsFile("token.json")
+    if gauth.credentials is None:
+        gauth.LocalWebserverAuth()
+    elif gauth.access_token_expired:
+        gauth.Refresh()
+    else:
+        gauth.Authorize()
+    gauth.SaveCredentialsFile("token.json")
     drive = GoogleDrive(gauth)
     # Upload arquivo
     file = drive.CreateFile({'parents': [{'id': '1flkyDl_B2NnH_zY8fFTOmOREzXtzKQas'}]})
     file.SetContentFile(file_path)
-    # file['title'] = name
+    file['title'] = name
     file.Upload()
     # Remove arquivo local
     time.sleep(5)
