@@ -5,6 +5,7 @@ venv/
 media/
 backups/
 token.json
+client_secret.json
 OAuth_token.json
 __pycache__
 *.pyc
