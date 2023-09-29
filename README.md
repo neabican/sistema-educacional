@@ -1,4 +1,4 @@
-# Sistema Educacional
+# Aquilombar
 
 ## Sobre
 Este sistema web tem como intuito possibilitar o cadastro, edição e deleção das instituições e seus câmpus, assim como os projetos, programas e ações afirmativas de cada câmpus. Os dados cadastrados neste projeto serão consumidos por outro projeto que irá ser de acesso do público geral.

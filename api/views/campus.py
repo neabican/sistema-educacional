@@ -17,7 +17,7 @@ def listar_campus(request):
         Q(nome__icontains=pesquisa) |
         Q(instituicao__sigla__icontains=pesquisa) |
         Q(cursos__curso__nome__icontains=pesquisa)
-      )
+      ).distinct()
     else:
       campus = Campus.objects.all()
 
