@@ -13,3 +13,5 @@ __pycache__
 *.log
 settings.yaml
 criar_usuarios.py
+templates/bootstrap4
+.vscode
