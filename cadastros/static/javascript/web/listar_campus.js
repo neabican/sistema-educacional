@@ -46,6 +46,8 @@ function renderizarCards() {
             <span>${item.cursos.length} Cursos Ofertados</span>
           </span>
         </div>
+        
+        <img data-src="${item.foto}" alt="Imagem do campus" loading="lazy">
       </a>
     `;
   });
