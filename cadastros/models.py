@@ -40,7 +40,7 @@ class CursoCampus(models.Model):
     def __str__(self):
         return self.curso.nome
 
-    @property
+    """ @property
     def vg_escola_publica(self):
         return math.ceil(self.vagas / 2)
 
@@ -103,7 +103,7 @@ class CursoCampus(models.Model):
 
     @property
     def RINPPI(self):
-        return self.vg_nao_PPI-self.RINPPIPCD
+        return self.vg_nao_PPI-self.RINPPIPCD """
 
 class Endereco(models.Model):
     ESTADOS_CHOICES = (
