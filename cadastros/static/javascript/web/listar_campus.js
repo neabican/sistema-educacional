@@ -32,22 +32,22 @@ function renderizarCards() {
 
         <div class="info-campus">
           <span>
-            <i class="fa fa-building"></i>
+            <i class="bi bi-building"></i>
             <span>${item.instituicao.sigla}</span>
           </span>
 
           <span>
-            <i class="fa fa-map-marker-alt"></i>
+            <i class="bi bi-geo-alt-fill"></i>
             <span>${item.endereco.cidade} - ${item.endereco.estado}</span>
           </span>
 
           <span>
-            <i class="fa fa-graduation-cap"></i>
+            <i class="bi bi-mortarboard-fill"></i>
             <span>${item.cursos.length} Cursos Ofertados</span>
           </span>
         </div>
         
-        <img data-src="${item.foto}" alt="Imagem do campus" loading="lazy">
+        <img data-src="${item.foto}" loading="lazy">
       </a>
     `;
   });
