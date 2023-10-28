@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/png">
 
     <!-- Fonte Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,8 +29,8 @@
     <!-- CSS do projeto -->
     <link rel="stylesheet" href="{% static 'css/web/detalhes_campus.css' %}">
 
-    <!-- Icones FontAwesome -->
-    <script src="https://kit.fontawesome.com/7b665cb419.js" crossorigin="anonymous"></script>
+    <!-- Icones Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
     <title>Aquilombar</title>
   </head>
@@ -38,7 +38,7 @@
   <body class="p-4">
     <header class="d-flex flex-column mb-4 gap-3">
       <a href="{% url 'web:listar_campus' %}" class="link-site">
-        <i class="fas fa-chevron-left"></i>
+        <i class="bi bi-chevron-left"></i>
         <span>Voltar</span>
       </a>
 
@@ -52,7 +52,7 @@
         <h2>{{ campus.instituicao.sigla }} {{ campus.nome }}</h2>
 
         <a href="{{ campus.link }}" class="link-site" target="_blank">
-          <i class="fas fa-globe"></i>
+          <i class="bi bi-globe"></i>
           Visitar site
         </a>
       </div>
@@ -124,7 +124,7 @@
                       {{ curso.curso.descricao|safe }}
                     </div>
                     <br>
-                    {% if curso.vagas %}
+                    <!-- {% if curso.vagas %}
                         <h4 class="titulo mb-3">Vagas</h4>
 
                         <table class="table">
@@ -217,10 +217,10 @@
                             </tr>
                           </tbody>
                         </table>
-                    {% endif %}
+                    {% endif %} -->
                     <br>
                     <a href="{{ curso.link }}" target="_blank" class="link-site">
-                      <i class="fas fa-globe"></i>
+                      <i class="bi bi-globe"></i>
                       Acessar página do curso
                     </a>
                   </div>
@@ -251,7 +251,7 @@
                     </div>
 
                     <a href="{{ programa.link }}" target="_blank" class="link-site">
-                      <i class="fas fa-globe"></i>
+                      <i class="bi bi-globe"></i>
                       Acessar página do programa
                     </a>
                   </div>
@@ -282,7 +282,7 @@
                     </div>
 
                     <a href="{{ projeto.link }}" target="_blank" class="link-site">
-                      <i class="fas fa-globe"></i>
+                      <i class="bi bi-globe"></i>
                       Acessar página do projeto
                     </a>
                   </div>
@@ -312,7 +312,7 @@
                     </div>
 
                     <a href="{{ acao.link }}" target="_blank" class="link-site">
-                      <i class="fas fa-globe"></i>
+                      <i class="bi bi-globe"></i>
                       Acessar página da assistência Estudantil
                     </a>
                   </div>
