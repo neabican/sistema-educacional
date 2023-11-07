@@ -46,6 +46,5 @@ admin.site.register(Programa, ProgramaAdmin)
 admin.site.register(Projeto, ProjetoAdmin)
 admin.site.register(AcaoAfirmativa, AcaoAfirmativaAdmin)
 admin.site.register(Curso, CursoAdmin)
-
+admin.site.register(Imagem)
 admin.site.register(Endereco)
-
