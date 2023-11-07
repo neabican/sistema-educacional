@@ -105,6 +105,7 @@ class CursoCampus(models.Model):
     def RINPPI(self):
         return self.vg_nao_PPI-self.RINPPIPCD """
 
+
 class Endereco(models.Model):
     ESTADOS_CHOICES = (
         ('AC', 'Acre'),
@@ -180,7 +181,6 @@ class AcaoAfirmativa(models.Model):
 
 class Campus(models.Model):
     nome = models.CharField(max_length=300)
-    foto = models.ImageField(blank=True, default=None, upload_to='fotos_campus/')
     link = models.CharField(max_length=500, default='')
     endereco = models.ForeignKey('Endereco', on_delete=models.PROTECT)
     instituicao = models.ForeignKey('Instituicao', on_delete=models.PROTECT)
@@ -190,6 +190,40 @@ class Campus(models.Model):
     def __str__(self):
         return self.nome
 
+    """ def save(self, arquivo_antigo, *args, **kwargs):
+        if self.foto:
+            if self.foto != arquivo_antigo:
+                im = Image.open(self.foto)
+
+                if (im.format == 'RGBA'):
+                    im = im.convert('RGB')
+
+                output = BytesIO()
+
+                im.save(output, format='PNG', quality=100)
+                output.seek(0)
+
+                self.foto = InMemoryUploadedFile(
+                    output,
+                    'ImageField',
+                    "%s.jpg" % self.foto.name.split('.')[0],
+                    'image/jpeg',
+                    sys.getsizeof(output),
+                    None
+                )
+
+        super(Campus, self).save() """
+
+
+class Imagem(models.Model):
+    campus = models.ForeignKey(
+        'Campus', related_name='fotos', on_delete=models.CASCADE)
+    foto = models.ImageField(blank=True, default=None,
+                             upload_to='fotos_campus/')
+
+    def __str__(self):
+        return self.campus.nome
+    
     def save(self, arquivo_antigo, *args, **kwargs):
         if self.foto:
             if self.foto != arquivo_antigo:
