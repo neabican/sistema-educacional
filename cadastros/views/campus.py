@@ -131,11 +131,6 @@ def editar_campus(request, pk):
 
                     campus.endereco = endereco
 
-
-
-                    if request.FILES.get('foto') is not None:
-                        campus.foto = request.FILES.get('foto')
-
                     campus.save()
                     messages.success(request, 'Câmpus editado com sucesso.')
 
