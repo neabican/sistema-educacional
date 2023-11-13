@@ -190,30 +190,6 @@ class Campus(models.Model):
     def __str__(self):
         return self.nome
 
-    """ def save(self, arquivo_antigo, *args, **kwargs):
-        if self.foto:
-            if self.foto != arquivo_antigo:
-                im = Image.open(self.foto)
-
-                if (im.format == 'RGBA'):
-                    im = im.convert('RGB')
-
-                output = BytesIO()
-
-                im.save(output, format='PNG', quality=100)
-                output.seek(0)
-
-                self.foto = InMemoryUploadedFile(
-                    output,
-                    'ImageField',
-                    "%s.jpg" % self.foto.name.split('.')[0],
-                    'image/jpeg',
-                    sys.getsizeof(output),
-                    None
-                )
-
-        super(Campus, self).save() """
-
 
 class Imagem(models.Model):
     campus = models.ForeignKey(
@@ -222,7 +198,7 @@ class Imagem(models.Model):
                              upload_to='fotos_campus/')
 
     def __str__(self):
-        return self.campus.nome
+        return self.foto.url
     
     def save(self, arquivo_antigo, *args, **kwargs):
         if self.foto:
@@ -246,4 +222,4 @@ class Imagem(models.Model):
                     None
                 )
 
-        super(Campus, self).save()
+        super(Imagem, self).save()
