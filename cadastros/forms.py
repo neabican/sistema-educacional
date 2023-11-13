@@ -47,7 +47,7 @@ class FormCurso(ModelForm):
 class FormCampus(ModelForm):
   class Meta:
     model = Campus
-    fields = ['nome', 'instituicao', 'foto', 'link', 'descricao']
+    fields = ['nome', 'instituicao', 'link', 'descricao']
 
   def __init__(self, *args, **kwargs):
     super(FormCampus, self).__init__(*args, **kwargs)
@@ -60,8 +60,7 @@ class FormCampus(ModelForm):
         Column('instituicao', css_class='col-xl-4')
       ),
       Row(
-        Column('foto', css_class='col-xl-3'),
-        Column('link', css_class='col-xl-9'),
+        Column('link', css_class='col-xl-12'),
       ),
       Row(
         Column('descricao', css_class='col-xl-12 textarea-descricao')
@@ -112,6 +111,22 @@ class FormCursoCampus(ModelForm):
         Column('vagas', css_class='col-xl-12'),
         Column('descricao', css_class='col-xl-12 textarea-descricao'),
         Column('link', css_class='col-xl-12'),
+      )
+    )
+        
+class FormImagem(ModelForm):
+  class Meta:
+    model = Imagem
+    fields = ['foto']
+    
+  def __init__(self, *args, **kwargs):
+    super(FormImagem, self).__init__(*args, **kwargs)
+    self.helper = FormHelper(self)
+    self.helper.form_tag = False
+    self.helper.attrs = {'novalidate': ''}
+    self.helper.layout = Layout(
+      Row(
+        Column('foto', css_class='col-xl-12')
       )
     )
 
