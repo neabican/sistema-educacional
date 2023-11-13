@@ -72,12 +72,9 @@ def cadastrar_campus(request):
                     endereco.longitude = longitude
                     endereco.save()
 
-                    campus.endereco = endereco
-
-                    arquivo_antigo = ''
-                    campus.foto = request.FILES.get('foto')
-
-                    campus.save(arquivo_antigo)
+                    campus.endereco = endereco                   
+                    
+                    campus.save()          
                     messages.success(request, 'Câmpus cadastrado com sucesso.')
 
                     return redirect('cadastros:campus')
@@ -134,12 +131,12 @@ def editar_campus(request, pk):
 
                     campus.endereco = endereco
 
-                    arquivo_antigo = campus.foto
+
 
                     if request.FILES.get('foto') is not None:
                         campus.foto = request.FILES.get('foto')
 
-                    campus.save(arquivo_antigo)
+                    campus.save()
                     messages.success(request, 'Câmpus editado com sucesso.')
 
                     return redirect('cadastros:campus')
