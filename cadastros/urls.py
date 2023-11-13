@@ -42,6 +42,23 @@ urlpatterns = [
     views.deletar_curso_campus, 
     name='deletar_curso_campus'
   ),
+  
+  # Imagens
+  path(
+    'campus/detalhes/<int:pk_campus>/cadastrar-imagem', 
+    views.cadastrar_imagem, 
+    name='cadastrar_imagem'
+  ),
+  path(
+    'campus/detalhes/<int:pk_campus>/editar-imagem/<int:pk>', 
+    views.editar_imagem, 
+    name='editar_imagem'
+  ),
+  path(
+    'campus/detalhes/<int:pk_campus>/deletar-imagem/<int:pk>', 
+    views.deletar_imagem, 
+    name='deletar_imagem'
+  ),
 
   # Programas
   path(
