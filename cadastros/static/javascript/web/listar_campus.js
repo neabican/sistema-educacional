@@ -21,34 +21,47 @@ function renderizarCards() {
 
   campus.forEach(item => {
     html += `
-      <a 
-        href="campus/${item.pk}" 
-        style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${item.foto}');"
-        class="card-campus shadow py-md-5 py-4 px-4"
-      >
-        <h2 class="mb-3">
-          ${item.instituicao.sigla} ${item.nome}
-        </h2>
+      <a href="campus/${item.pk}" 
+              style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); position: relative;"
+              class="card-campus shadow py-md-5 py-4 px-4">`
 
-        <div class="info-campus">
-          <span>
+    html += `
+        <div id="carousel${item.pk}" class="carousel slide" data-bs-ride="carousel"
+        style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; overflow: hidden; z-index: 1;">
+        <div class="carousel-inner">`;
+
+    item.fotos.forEach((foto, index) => {
+        html += `
+            <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                <img src="${foto.foto}" class="d-block w-100 h-100" alt="...">
+            </div>
+        `;
+    });
+    
+    html += `
+        </div>
+          </div>
+          <h2 class="mb-3" style="position: absolute; z-index: 2; padding: 20px;">
+              ${item.instituicao.sigla} ${item.nome}
+          </h2>
+
+      <div class="info-campus" style="position: absolute; z-index: 2;">
+        <span>
             <i class="bi bi-building"></i>
             <span>${item.instituicao.sigla}</span>
-          </span>
+        </span>
 
-          <span>
+        <span>
             <i class="bi bi-geo-alt-fill"></i>
             <span>${item.endereco.cidade} - ${item.endereco.estado}</span>
-          </span>
+        </span>
 
-          <span>
+        <span>
             <i class="bi bi-mortarboard-fill"></i>
             <span>${item.cursos.length} Cursos Ofertados</span>
-          </span>
-        </div>
-        
-        <img data-src="${item.foto}" loading="lazy">
-      </a>
+        </span>
+    </div>
+    </a>
     `;
   });
 
@@ -59,7 +72,19 @@ function renderizarCards() {
   `;
 
   listaCampus.innerHTML = html;
+
+  // Inicialize os carrosséis depois que o HTML for inserido no DOM
+  campus.forEach(item => {
+    const carouselElement = document.querySelector(`#carousel${item.pk}`);
+    const carousel = new bootstrap.Carousel(carouselElement, {
+      interval: 5000, // 5 segundos
+    });
+  });
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    renderizarCards();
+});
 
 async function pesquisarCampus() {
   const nomeCampus = inputPesquisa.value;
