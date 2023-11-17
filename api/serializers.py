@@ -54,6 +54,11 @@ class AcaoAfirmativaSerializer(serializers.ModelSerializer):
       'pk', 'nome', 'descricao',
       'link', 'campus'
     ]
+    
+class ImagemSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Imagem
+    fields = ['pk', 'foto']
 
 class CampusSerializer(serializers.ModelSerializer):
   instituicao = InstituicaoSerializer()
@@ -62,6 +67,7 @@ class CampusSerializer(serializers.ModelSerializer):
   programas = serializers.SerializerMethodField()
   projetos = serializers.SerializerMethodField()
   acoes_afirmativas = serializers.SerializerMethodField()
+  fotos = ImagemSerializer(many=True)
 
   def get_programas(self, obj):
     return ProgramaSerializer(Programa.objects.filter(campus=obj), many=True).data
@@ -71,11 +77,14 @@ class CampusSerializer(serializers.ModelSerializer):
 
   def get_acoes_afirmativas(self, obj):
     return AcaoAfirmativaSerializer(AcaoAfirmativa.objects.filter(campus=obj), many=True).data
+  
+  def get_fotos(self, obj):
+    return ImagemSerializer(Imagem.objects.filter(campus=obj), many=True).data
 
   class Meta:
     model = Campus
     fields = [
-      'pk', 'nome', 'foto', 'instituicao',
+      'pk', 'nome', 'fotos', 'instituicao',
       'endereco', 'cursos', 'programas',
       'projetos', 'acoes_afirmativas',
     ]
@@ -86,6 +95,7 @@ class CampusSerializerSemInstituicao(serializers.ModelSerializer):
   programas = serializers.SerializerMethodField()
   projetos = serializers.SerializerMethodField()
   acoes_afirmativas = serializers.SerializerMethodField()
+  fotos = ImagemSerializer(many=True)
 
   def get_programas(self, obj):
     return ProgramaSerializer(Programa.objects.filter(campus=obj), many=True).data
@@ -95,11 +105,14 @@ class CampusSerializerSemInstituicao(serializers.ModelSerializer):
 
   def get_acoes_afirmativas(self, obj):
     return AcaoAfirmativaSerializer(AcaoAfirmativa.objects.filter(campus=obj), many=True).data
-
+  
+  def get_fotos(self, obj):
+    return ImagemSerializer(Imagem.objects.filter(campus=obj), many=True).data
+    
   class Meta:
     model = Campus
     fields = [
-      'pk', 'nome', 'foto', 'link', 'instituicao',
+      'pk', 'nome', 'fotos', 'link', 'instituicao',
       'endereco', 'descricao', 'cursos', 'programas',
       'projetos', 'acoes_afirmativas',
     ]

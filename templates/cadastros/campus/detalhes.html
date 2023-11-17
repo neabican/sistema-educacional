@@ -389,6 +389,78 @@
           <div class="card shadow mb-3">
             <div class="card-header">
               <div class="d-flex align-items-center justify-content-between">
+                <h5 class="text-primary mb-0">Fotos</h5>
+                <a 
+                  href="{% url 'cadastros:cadastrar_imagem' campus.pk %}"
+                  class="btn btn-sm btn-primary"
+                >
+                  Nova Foto
+                </a>
+              </div>
+            </div>
+            <div class="card-body">
+              {% if campus.fotos.exists  %}
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hoverable" id="tabela-projeto">
+                    <thead>
+                      <tr>
+                        <th scope="col">Foto</th>
+                        <th scope="col">Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for foto in campus.fotos.all %}
+                        <tr>
+                          <td>
+                              <a href="{{foto}}" target="_blank">Ver Imagem</a>
+                            
+                          </td>
+                          <td>
+                            <ul class="list-inline mb-0">
+                              <li class="list-inline-item">
+                                <a 
+                                  href="{% url 'cadastros:editar_imagem' campus.pk foto.pk %}" 
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  title="Editar"
+                                >
+                                  <i class="bx bx-edit"></i>
+                                </a>
+                              </li>
+                              <li class="list-inline-item">
+                                <a 
+                                  href="#" 
+                                  id="{% url 'cadastros:deletar_imagem' campus.pk foto.pk %}"
+                                  class="table-link" 
+                                  data-bs-toggle="tooltip" 
+                                  data-bs-placement="top" 
+                                  data-toggle="modal" 
+                                  data-target="#modal-delecao"
+                                  onclick="abrirModalDelecao(event, 'foto')"
+                                  title="Deletar"
+                                >
+                                  <i class="bx bx-trash-alt"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              {% else %}
+                <h6 class="text-center">Nenhuma foto cadastrado.</h6>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6">
+          <div class="card shadow mb-3">
+            <div class="card-header">
+              <div class="d-flex align-items-center justify-content-between">
                 <h5 class="text-primary mb-0">Assistências Estudantil</h5>
                 <a 
                   href="{% url 'cadastros:cadastrar_acao_afirmativa' campus.pk %}"
