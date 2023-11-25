@@ -194,7 +194,7 @@ class Campus(models.Model):
 class Imagem(models.Model):
     campus = models.ForeignKey(
         'Campus', related_name='fotos', on_delete=models.CASCADE)
-    foto = models.ImageField(blank=True, default=None,
+    foto = models.ImageField(blank=False, default=None,
                              upload_to='fotos_campus/')
 
     def __str__(self):
