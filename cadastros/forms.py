@@ -6,24 +6,7 @@ from crispy_forms.layout import Layout, Row, Column, HTML, Submit
 
 from .models import *
 
-class FormCota(ModelForm):
-  class Meta:
-    model = Cota
-    fields = ['nome', 'porcentagem']
 
-  def __init__(self, *args, **kwargs):
-    super(FormCota, self).__init__(*args, **kwargs)
-    self.helper = FormHelper(self)
-    self.helper.form_tag = False
-    self.helper.attrs = {'novalidate': ''}
-    self.helper.layout = Layout(
-      Row(
-        Column('nome', css_class='col-xl-12')
-      ),
-      Row(
-        Column('porcentagem', css_class='col-xl-12')
-      )
-    )
 
 class FormCurso(ModelForm):
   class Meta:
@@ -114,13 +97,13 @@ class FormCursoCampus(ModelForm):
       )
     )
         
-class FormImagem(ModelForm):
+class FormFotos(ModelForm):
   class Meta:
-    model = Imagem
+    model = Fotos
     fields = ['foto']
     
   def __init__(self, *args, **kwargs):
-    super(FormImagem, self).__init__(*args, **kwargs)
+    super(FormFotos, self).__init__(*args, **kwargs)
     self.helper = FormHelper(self)
     self.helper.form_tag = False
     self.helper.attrs = {'novalidate': ''}
@@ -130,57 +113,14 @@ class FormImagem(ModelForm):
       )
     )
 
-class FormPrograma(ModelForm):
+
+class FormAcoesAfirmativas(ModelForm):
   class Meta:
-    model = Programa
+    model = AcoesAfirmativas
     fields = ['nome', 'descricao', 'link',]
 
   def __init__(self, *args, **kwargs):
-    super(FormPrograma, self).__init__(*args, **kwargs)
-    self.helper = FormHelper(self)
-    self.helper.form_tag = False
-    self.helper.attrs = {'novalidate': ''}
-    self.helper.layout = Layout(
-      Row(
-        Column('nome', css_class='col-xl-12'),
-      ),
-      Row(
-        Column('descricao', css_class='col-xl-12 textarea-descricao'),
-      ),
-      Row(
-        Column('link', css_class='col-xl-12'),
-      )
-    )
-
-class FormProjeto(ModelForm):
-  class Meta:
-    model = Projeto
-    fields = ['nome', 'descricao', 'link',]
-
-  def __init__(self, *args, **kwargs):
-    super(FormProjeto, self).__init__(*args, **kwargs)
-    self.helper = FormHelper(self)
-    self.helper.form_tag = False
-    self.helper.attrs = {'novalidate': ''}
-    self.helper.layout = Layout(
-      Row(
-        Column('nome', css_class='col-xl-12'),
-      ),
-      Row(
-        Column('descricao', css_class='col-xl-12 textarea-descricao'),
-      ),
-      Row(
-        Column('link', css_class='col-xl-12'),
-      )
-    )
-
-class FormAcaoAfirmativa(ModelForm):
-  class Meta:
-    model = AcaoAfirmativa
-    fields = ['nome', 'descricao', 'link',]
-
-  def __init__(self, *args, **kwargs):
-    super(FormAcaoAfirmativa, self).__init__(*args, **kwargs)
+    super(FormAcoesAfirmativas, self).__init__(*args, **kwargs)
     self.helper = FormHelper(self)
     self.helper.form_tag = False
     self.helper.attrs = {'novalidate': ''}
